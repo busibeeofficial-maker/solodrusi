@@ -154,10 +154,8 @@ b,strong{font-weight:800}
 .figband{margin:clamp(2.5rem,5vw,4rem) auto 0}
 .figband img{display:block;width:100%;height:auto;border-radius:var(--r);object-fit:cover}
 .lab .figband img{aspect-ratio:2/1;object-position:50% 100%}
-.about .figband img{aspect-ratio:16/9;object-position:50% 52%}
 @media (max-width:720px){
   .lab .figband img{aspect-ratio:3/2;object-position:50% 100%}
-  .about .figband img{aspect-ratio:4/3;object-position:50% 52%}
 }
 .figband figcaption{margin-top:1.1rem;font-size:clamp(.85rem,.82rem + .2vw,.98rem);color:var(--brown-75);max-width:74ch;line-height:1.5}
 .figband figcaption b{color:var(--brown-900)}
