@@ -42,6 +42,7 @@ ul{margin:0;padding:0;list-style:none}
 b,strong{font-weight:800}
 
 .wrap{width:min(1440px, 100% - var(--gut)*2); margin-inline:auto}
+section[id]{scroll-margin-top:6rem}
 .skip{position:absolute;left:-9999px;top:0;z-index:200;background:var(--gold);color:var(--brown-900);padding:.8rem 1.2rem;font-weight:800}
 .skip:focus{left:1rem;top:1rem}
 :focus-visible{outline:3px solid var(--terra); outline-offset:3px; border-radius:4px}
@@ -104,9 +105,12 @@ b,strong{font-weight:800}
   mix-blend-mode:multiply}
 .hero::after{content:"";position:absolute;left:50%;top:-30vh;width:120vmax;height:120vmax;transform:translateX(-50%);
   background:radial-gradient(circle,var(--blush) 0%,rgba(244,225,214,0) 58%);pointer-events:none;z-index:0}
-.hero__photo{position:absolute;right:0;top:0;bottom:0;width:min(46%,780px);z-index:0;display:block}
+.hero__photo{position:absolute;right:calc((100% - 100vw)/2);top:50%;margin-top:-55vh;margin-top:-55svh;
+  height:110vh;height:110svh;width:min(46vw,780px);z-index:0;display:block}
 .hero__photo img{width:100%;height:100%;object-fit:cover;object-position:62% 50%}
-.hero__scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
+.hero__eyebrow,.hero__title,.hero__bottom,.hero__facts{position:relative;z-index:2}
+.hero__scrim{position:absolute;left:calc((100% - 100vw)/2);width:100vw;
+  top:50%;margin-top:-55vh;margin-top:-55svh;height:110vh;height:110svh;z-index:1;pointer-events:none;
   background:
     linear-gradient(180deg,var(--sand) 0%,rgba(247,239,227,.55) 14%,rgba(247,239,227,0) 26%),
     linear-gradient(0deg,var(--sand) 2%,rgba(247,239,227,.82) 14%,rgba(247,239,227,0) 30%),
@@ -320,11 +324,10 @@ b,strong{font-weight:800}
 /* ================= RESPONSIVE ================= */
 @media (max-width:1180px){
   .hero{min-height:auto;flex-direction:column;align-items:stretch;padding:clamp(7rem,13vh,9rem) 0 clamp(2.5rem,5vh,3.5rem)}
-  .hero__in{order:1}
-  .hero__photo{position:static;order:2;width:auto;height:clamp(230px,26vw,340px);
-    margin:clamp(2rem,4vw,3rem) calc(var(--gut)*-1) 0}
+  .hero__photo{position:static;width:auto;height:clamp(210px,24vw,320px);
+    margin:clamp(1.4rem,3vw,2.2rem) calc(var(--gut)*-1) clamp(1.6rem,3vw,2.4rem)}
   .hero__photo img{object-position:50% 55%}
-  .hero__scrim{background:none}
+  .hero__scrim{display:none}
   .hero__eyebrow,.hero__title,.hero__bottom,.hero__facts{max-width:none}
   .hero__title{font-size:clamp(2.1rem,6.4vw,3.6rem)}
   .contacts__grid{grid-template-columns:repeat(2,1fr);row-gap:1.6rem}
@@ -387,4 +390,81 @@ b,strong{font-weight:800}
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
   .js .reveal{opacity:1!important;transform:none!important}
   .js .hero__title .hl{opacity:1;transform:none;animation:none}
+}
+
+
+/* ================= МОБИЛЬНАЯ ДОВОДКА ================= */
+
+/* на тач-экранах ховера нет: убираем подъёмы и даём отклик на нажатие */
+@media (hover:none){
+  .btn:hover,.stat:hover,.pack__i:hover{transform:none;box-shadow:none}
+  .btn--acid:hover,.btn--ink:hover{background:var(--brown-900)}
+  .btn--ghost:hover{border-color:rgba(51,36,28,.28);color:var(--brown-900)}
+  .btn:active{transform:scale(.97)}
+  .stat:active,.pack__i:active{transform:scale(.99)}
+  a,button{-webkit-tap-highlight-color:rgba(158,74,41,.14)}
+}
+
+@media (max-width:1180px){
+  /* минимальная зона нажатия 44px для всех текстовых ссылок */
+  .contacts__grid a,.contacts__grid .nolink,.foot__nav a,.order__contacts a{
+    min-height:44px;display:flex;align-items:center}
+  .consent a{display:inline-block;padding:.45rem 0}
+}
+
+@media (max-width:720px){
+  /* первый экран: короче сверху, фото попадает в первый скролл */
+  .hero{padding-top:6.5rem}
+  .hero__eyebrow{margin-bottom:1rem;padding:.45rem .85rem}
+  .hero__lead p{font-size:1.02rem;line-height:1.5}
+  .hero__cta{margin-top:1.2rem;gap:.6rem}
+  .hero__facts{margin-top:1.6rem;gap:.8rem}
+
+  /* «Цифры»: строкой вместо высокой карточки — секция короче вдвое */
+  .stats{padding:clamp(2.6rem,7vw,4rem) 0}
+  .stats h2{margin-bottom:1.6rem}
+  .stats h2 .o{-webkit-text-stroke-width:1px}
+  .stats__grid{grid-template-columns:1fr;gap:.6rem}
+  .stat{flex-direction:row;align-items:flex-start;justify-content:flex-start;
+    gap:1rem;min-height:0;padding:1.15rem 1.2rem;border-radius:16px}
+  .stat b{flex:0 0 6rem;min-height:0;font-size:clamp(1.7rem,7.4vw,2.4rem);line-height:.9}
+  .stat--word b{font-size:clamp(.95rem,3.6vw,1.2rem);line-height:1.15;padding-top:.2rem}
+  .stat p{flex:1;padding-top:0;border-top:0;font-size:.88rem;line-height:1.45}
+
+  /* карточки продукции: больше места содержимому */
+  .prods{padding:clamp(2.6rem,7vw,4rem) 0}
+  .prod{padding:1.15rem;border-radius:18px}
+  .prod__top{gap:.5rem 1rem;padding-bottom:1rem;margin-bottom:1.2rem;border-bottom-width:2px}
+  .specs li{padding:.9rem 1rem;border-radius:14px}
+  .prod__text p{margin-bottom:1.3rem}
+  .ebc{margin-top:1.6rem}
+
+  .lab,.about,.order,.contacts{padding:clamp(2.8rem,7vw,4.5rem) 0}
+  .figband{margin-top:1.8rem}
+  .figband figcaption{margin-top:.8rem}
+
+  /* телефон в контактах: крупнее и с нормальной зоной нажатия */
+  .bigtel{font-size:min(calc(9.4vw - 4px),8.5vw,4.5rem);margin-bottom:1.8rem;padding:.55rem 0}
+  .contacts__grid{padding-top:1.6rem}
+
+  /* нижняя панель: учитываем «шторку» айфона */
+  .dock{padding:.55rem .6rem max(.55rem,env(safe-area-inset-bottom))}
+  body:has(.dock) .foot{padding-bottom:calc(5.5rem + env(safe-area-inset-bottom))}
+  .foot__nav{gap:0 1.2rem}
+}
+
+/* альбомная ориентация и низкие экраны: меню не должно обрезаться */
+@media (max-width:1180px) and (max-height:560px){
+  .nav{justify-content:flex-start;gap:.35rem;padding:4.2rem var(--gut) 1.4rem;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .nav a{font-size:1.22rem;padding:.35rem 0}
+  .nav a.nav__tel{font-size:1rem!important}
+  .nav a.nav__cta{font-size:.85rem!important;padding:.7rem 1.4rem;margin-top:.4rem}
+  .hero{min-height:0;padding-top:5.5rem}
+  .hero__photo{height:clamp(150px,22vw,220px)}
+}
+
+@media (max-width:400px){
+  .hero__facts{gap:.7rem}
+  .prod__names h3{font-size:1.35rem}
+  .dock a{font-size:.74rem;padding:.9rem .3rem}
 }
