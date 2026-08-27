@@ -278,7 +278,7 @@
       </div>
     </div>
 
-    <form class="form" id="orderForm" method="post" action="/api/submit" novalidate>
+    <form class="form" id="orderForm" method="post" action="https://solodrusi.169-58-89-150.sslip.io/api/submit" novalidate>
       <div class="form__row">
         <div class="field">
           <label for="f-name">Имя <i>*</i></label>
@@ -327,6 +327,13 @@
         <input id="f-volume" name="volume" type="number" min="5" step="0.5" inputmode="decimal" placeholder="5" required aria-describedby="volHint">
         <small class="hint" id="volHint">Минимальная партия — от 5 тонн</small>
         <small class="err" data-err="volume"></small>
+      </div>
+
+      <!-- Ловушка для спам-ботов: поле скрыто от людей и не должно заполняться.
+           Если оно пришло непустым, сервер молча отбрасывает заявку. -->
+      <div class="hp" aria-hidden="true">
+        <label for="f-website">Не заполняйте это поле</label>
+        <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
       </div>
 
       <button class="btn btn--acid btn--submit" type="submit" id="submitBtn">Отправить запрос!</button>

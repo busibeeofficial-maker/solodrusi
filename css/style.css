@@ -275,6 +275,9 @@ section[id]{scroll-margin-top:6rem}
 .hint{display:block;margin-top:.4rem;font-size:.8rem;color:var(--brown-68)}
 .err{display:none;margin-top:.4rem;font-size:.82rem;font-weight:700;color:#9C2C16}
 .field.is-bad .err{display:block}
+/* Honeypot: убран из потока и от скринридеров, но остаётся заполняемым для ботов.
+   display:none не используем — часть ботов такие поля пропускает. */
+.hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
 .btn--submit{width:100%;padding:1.25rem 2rem;font-size:1.05rem;margin-top:.5rem}
 .btn--submit[disabled]{opacity:1;background:#5A4438;color:var(--sand);cursor:progress;transform:none}
 .consent{margin:1rem 0 0;font-size:.82rem;color:var(--brown-68);text-align:center}
