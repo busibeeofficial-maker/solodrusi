@@ -113,7 +113,12 @@
   var select = document.getElementById('f-product');
   document.querySelectorAll('[data-prefill]').forEach(function (a) {
     a.addEventListener('click', function () {
-      if (select) select.value = a.getAttribute('data-prefill');
+      if (!select) return;
+      select.value = a.getAttribute('data-prefill');
+      /* Присваивание .value из скрипта не порождает событий, поэтому валидатор
+         о нём не узнаёт: под уже заполненным полем оставалась висеть красная
+         подпись «Выберите солод». Сообщаем ему сами. */
+      select.dispatchEvent(new Event('change', { bubbles: true }));
     });
   });
 
