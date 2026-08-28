@@ -51,8 +51,9 @@ section[id]{scroll-margin-top:5rem}
 .about .kicker::before,.stats .kicker::before{background:var(--ink)}
 
 .h2{font-size:clamp(2.4rem,1rem + 6.4vw,7rem);line-height:.9;letter-spacing:-.02em}
-.h2 .em{color:transparent;-webkit-text-stroke:1.6px var(--on-dark);paint-order:stroke fill}
-.stats .em,.about .em{color:transparent;-webkit-text-stroke:1.4px var(--ink);position:relative}
+/* контурная строка — один приём на весь сайт */
+.ac,.em,.o,.it{color:transparent;-webkit-text-stroke:1.6px var(--on-dark);paint-order:stroke fill}
+.stats .o,.stats .em,.about .em,.about .o{-webkit-text-stroke-color:var(--ink)}
 
 /* ---------- кнопки ---------- */
 .btn{
@@ -105,7 +106,7 @@ section[id]{scroll-margin-top:5rem}
     linear-gradient(180deg,var(--ink) 0%,rgba(19,19,22,.5) 16%,rgba(19,19,22,0) 30%),
     linear-gradient(0deg,var(--ink) 0%,rgba(19,19,22,.6) 14%,rgba(19,19,22,0) 34%),
     linear-gradient(96deg,var(--ink) 32%,rgba(19,19,22,.9) 50%,rgba(19,19,22,.58) 68%,rgba(19,19,22,.18) 84%,rgba(19,19,22,0) 96%)}
-.hero__eyebrow,.hero__title,.hero__bottom,.hero__facts{position:relative;z-index:2}
+.hero__eyebrow,.hero__title,.hero__bottom{position:relative;z-index:2}
 .hero__eyebrow{display:inline-flex;align-items:center;gap:.7rem;font-size:.7rem;font-weight:500;letter-spacing:.2em;
   text-transform:uppercase;color:var(--on-dark-70);margin:0 0 clamp(1.2rem,3vh,2rem)}
 .dot{width:6px;height:6px;background:var(--acid);flex:none;border-radius:50%}
@@ -116,7 +117,6 @@ section[id]{scroll-margin-top:5rem}
   letter-spacing:-.02em;text-transform:uppercase;margin:0 0 clamp(1.6rem,4vh,2.6rem);
   text-shadow:0 0 26px rgba(19,19,22,.5)}
 .hero__title .hl{display:block}
-.hero__title .ac{color:transparent;-webkit-text-stroke:2.5px var(--on-dark);paint-order:stroke fill}
 .js .hero__title .hl{opacity:0;transform:translateY(.22em);animation:up 1s cubic-bezier(.16,1,.3,1) forwards;animation-delay:calc(var(--d)*.13s + .1s)}
 @keyframes up{to{opacity:1;transform:none}}
 
@@ -136,9 +136,8 @@ section[id]{scroll-margin-top:5rem}
 
 /* ---------- цифры ---------- */
 .stats{background:var(--bone);color:var(--ink);padding:clamp(4rem,10vw,9rem) 0}
-.stats h2{font-family:var(--disp);font-weight:500;font-size:clamp(2.2rem,1rem + 5.4vw,6rem);line-height:.94;
+.stats h2{font-family:var(--disp);font-weight:500;font-size:clamp(2.4rem,1rem + 6.4vw,7rem);line-height:.9;
   letter-spacing:-.02em;margin-bottom:clamp(2.4rem,5vw,4rem)}
-.stats h2 .o{color:transparent;-webkit-text-stroke:1px var(--ink)}
 .stats__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line-light);border-bottom:1px solid var(--line-light)}
 .stat{padding:clamp(1.6rem,2.6vw,2.4rem) clamp(1.2rem,2vw,2rem) clamp(1.8rem,3vw,2.6rem) 0;
   border-right:1px solid var(--line-light);display:flex;flex-direction:column;gap:1.2rem}
@@ -147,7 +146,6 @@ section[id]{scroll-margin-top:5rem}
 .stat b{font-family:var(--disp);font-weight:400;font-size:clamp(3rem,1.4rem + 5.6vw,7rem);line-height:.86;letter-spacing:-.02em;
   display:flex;align-items:flex-end;min-height:calc(clamp(3rem,1.4rem + 5.6vw,7rem) * .86)}
 .stat p{margin:0;font-size:.9rem;color:var(--on-light-70);line-height:1.5;max-width:26ch}
-.stat--acid b{color:var(--ink)}
 .stat--acid{position:relative}
 .stat--acid::before{content:"";position:absolute;left:0;top:-1px;width:100%;height:3px;background:var(--acid)}
 .stat--word b{font-size:clamp(1.6rem,1rem + 2.2vw,3rem);align-items:flex-start;line-height:1}
@@ -177,9 +175,9 @@ section[id]{scroll-margin-top:5rem}
 .prod__text p{color:var(--on-dark-70);font-size:clamp(.95rem,.92rem + .22vw,1.05rem);margin-bottom:1.8rem}
 
 .ebc{position:relative;margin-top:clamp(2rem,4vw,3rem);padding-top:2.4rem}
-.ebc__flag{position:absolute;top:0;z-index:1;font-family:var(--disp);font-weight:400;font-size:.9rem;letter-spacing:.06em;
+.ebc__flag{position:absolute;top:0;z-index:1;transform:translateX(-50%);font-family:var(--disp);font-weight:400;font-size:.9rem;letter-spacing:.06em;
   color:var(--acid);border-bottom:1px solid var(--acid);padding-bottom:.3rem;white-space:nowrap}
-.ebc__flag::after{content:"";position:absolute;left:1rem;bottom:-9px;width:1px;height:9px;background:var(--acid)}
+.ebc__flag::after{content:"";position:absolute;left:50%;bottom:-9px;width:1px;height:9px;background:var(--acid)}
 .ebc__bar{position:relative;height:6px;border-radius:1px;
   background:linear-gradient(90deg,#F6E7C0 0%,#EFD48D 12%,#E2B562 28%,#C98B48 45%,#96603A 62%,#5C3826 78%,#33201A 92%,#241410 100%)}
 .ebc__zone{position:absolute;top:-6px;bottom:-6px;min-width:6px;border:1px solid var(--acid);border-radius:1px;background:rgba(233,226,26,.14)}
@@ -285,7 +283,7 @@ section[id]{scroll-margin-top:5rem}
 .contacts__grid>div>span:first-child{display:block;font-size:.66rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--on-dark-45);margin-bottom:1rem}
 .contacts__grid a,.contacts__grid .nolink{display:block;text-decoration:none;font-size:.95rem;margin:0 0 .5rem;color:var(--on-dark)}
 .contacts__grid a:hover{color:var(--acid)}
-.nolink{color:var(--on-dark-70)}
+.contacts__grid .nolink{color:var(--on-dark-45)}
 
 .foot{background:var(--ink);border-top:1px solid var(--line-dark);padding:clamp(2.4rem,4vw,3.4rem) 0}
 .foot__in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.6rem;align-items:start}
@@ -361,8 +359,7 @@ section[id]{scroll-margin-top:5rem}
   .foot__nav{justify-content:flex-start}
 }
 @media (max-width:720px){
-  .hero__title .ac{-webkit-text-stroke-width:1.3px}
-  .h2 .em,.stats .em,.about .em{-webkit-text-stroke-width:1px}
+  .ac,.em,.o,.it{-webkit-text-stroke-width:1.1px}
   .hero__cta{display:grid;grid-template-columns:1fr;gap:.6rem}
   .hero__cta .btn{width:100%}
   .hero__facts{grid-template-columns:repeat(2,1fr)}
@@ -392,7 +389,7 @@ section[id]{scroll-margin-top:5rem}
   .about__list span{text-align:left}
   .bigtel{font-size:min(calc(15vw - 4px),14vw,7rem);padding:.5rem 0}
   .dock{display:flex;padding-bottom:env(safe-area-inset-bottom)}
-  .foot{padding-bottom:calc(4.5rem + env(safe-area-inset-bottom))}
+  body:has(.dock) .foot{padding-bottom:calc(4.5rem + env(safe-area-inset-bottom))}
   .lab .figband img{aspect-ratio:3/2}
 }
 @media (max-width:1180px) and (max-height:560px){

@@ -69,7 +69,7 @@
   /* ---------- 34-tick dial ---------- */
   var dial = document.getElementById('dial');
   if (dial) {
-    var ns = 'http://www.w3.org/2000/svg', N = 34, out = '';
+    var N = 34, out = '';
     for (var i = 0; i < N; i++) {
       var a = (i / N) * Math.PI * 2 - Math.PI / 2;
       var r1 = 88, r2 = i % 5 === 0 ? 116 : 106;
@@ -78,26 +78,21 @@
     }
     dial.setAttribute('viewBox', '0 0 240 240');
     dial.innerHTML = out;
-    void ns;
   }
 
   /* ---------- scroll-linked motion ---------- */
   var parallax = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
-  var drifts = Array.prototype.slice.call(document.querySelectorAll('[data-drift]'));
   var ticking = false;
+  // ниже 1181px фото первого экрана стоит в потоке — сдвигать его нельзя,
+  // иначе сверху открывается пустая полоса
+  var wide = window.matchMedia('(min-width:1181px)');
   function onScroll() {
     if (hdr) hdr.classList.toggle('is-stuck', window.scrollY > 24);
     if (reduced) return;
-    var vh = window.innerHeight;
     parallax.forEach(function (el) {
+      if (!wide.matches) { el.style.transform = ''; return; }
       var k = parseFloat(el.getAttribute('data-parallax'));
       el.style.transform = 'translate3d(0,' + (window.scrollY * k).toFixed(1) + 'px,0)';
-    });
-    drifts.forEach(function (el) {
-      var r = el.getBoundingClientRect();
-      var p = (vh - r.top) / (vh + r.height);
-      p = Math.max(0, Math.min(1, p));
-      el.style.transform = 'translate3d(' + ((p - 0.5) * parseFloat(el.getAttribute('data-drift'))).toFixed(1) + 'px,0,0)';
     });
   }
   function tick() {
