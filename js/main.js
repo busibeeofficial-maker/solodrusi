@@ -57,6 +57,15 @@
     Array.prototype.forEach.call(targets, function (el) { el.classList.add('is-in'); });
   }
 
+  // страховка: часть содержимого спрятана до появления в кадре.
+  // если наблюдатель по какой-то причине не сработал — показываем всё принудительно
+  setTimeout(function () {
+    Array.prototype.forEach.call(targets, function (el) {
+      var r = el.getBoundingClientRect();
+      if (!el.classList.contains('is-in') && r.top < window.innerHeight * 1.5) el.classList.add('is-in');
+    });
+  }, 2500);
+
   /* ---------- счётчики ---------- */
   function runCount(el) {
     var to = parseFloat(el.getAttribute('data-count'));
@@ -96,6 +105,25 @@
         ticking = false;
       });
     }, { passive: true });
+  }
+
+  /* ---------- рисунок первого экрана слегка следует за курсором ---------- */
+  if (art && !reduced && window.matchMedia('(hover:hover)').matches) {
+    var bp = art.querySelector('.blueprint');
+    var earG = art.querySelector('.ear');
+    var raf = null, tx = 0, ty = 0;
+    document.querySelector('.hero').addEventListener('mousemove', function (e) {
+      var r = art.getBoundingClientRect();
+      tx = ((e.clientX - (r.left + r.width / 2)) / r.width) * 2;
+      ty = ((e.clientY - (r.top + r.height / 2)) / r.height) * 2;
+      if (raf) return;
+      raf = requestAnimationFrame(function () {
+        if (bp) bp.style.setProperty('--mx', (tx * 9).toFixed(2) + 'px');
+        if (bp) bp.style.setProperty('--my', (ty * 9).toFixed(2) + 'px');
+        if (earG) earG.style.setProperty('--ex', (tx * -4).toFixed(2) + 'px');
+        raf = null;
+      });
+    });
   }
 
   /* ---------- маска телефона ---------- */
