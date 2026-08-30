@@ -2,46 +2,62 @@
   'use strict';
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- year ---------- */
   var y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
 
-  /* ---------- sticky header ---------- */
+  /* ---------- шапка ---------- */
   var hdr = document.getElementById('hdr');
-  /* ---------- mobile menu ---------- */
+  function onScroll() { if (hdr) hdr.classList.toggle('is-stuck', window.scrollY > 8); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- мобильное меню ---------- */
   var burger = document.getElementById('burger');
-  var nav = document.getElementById('nav');
+  var mobnav = document.getElementById('mobnav');
   function closeMenu() {
     document.body.classList.remove('menu-open');
     if (burger) burger.setAttribute('aria-expanded', 'false');
   }
-  if (burger && nav) {
+  if (burger && mobnav) {
     burger.addEventListener('click', function () {
       var open = document.body.classList.toggle('menu-open');
       burger.setAttribute('aria-expanded', String(open));
     });
-    nav.addEventListener('click', function (e) {
-      if (e.target.closest('a')) closeMenu();
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeMenu();
-    });
+    mobnav.addEventListener('click', function (e) { if (e.target.closest('a')) closeMenu(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
   }
 
-  /* ---------- reveal on scroll ---------- */
-  var revealables = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
+  /* ---------- подготовка линейной графики к прорисовке ---------- */
+  // каждой линии задаём её собственную длину и небольшую задержку,
+  // чтобы рисунок собирался по частям, а не появлялся целиком
+  Array.prototype.forEach.call(document.querySelectorAll('.art'), function (art) {
+    var paths = art.querySelectorAll('.d');
+    Array.prototype.forEach.call(paths, function (p, i) {
+      var len;
+      try { len = p.getTotalLength(); } catch (e) { len = 0; }
+      if (!len || !isFinite(len)) len = 600;
+      p.style.setProperty('--len', Math.ceil(len + 2));
+      var isBlueprint = !!p.closest('.blueprint');
+      p.style.setProperty('--dl', isBlueprint ? i * 45 : 380 + i * 70);
+    });
+  });
+
+  /* ---------- появление ---------- */
+  var targets = document.querySelectorAll('[data-anim], .art');
+  if ('IntersectionObserver' in window && !reduced) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
-        if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
+        if (!en.isIntersecting) return;
+        en.target.classList.add('is-in');
+        io.unobserve(en.target);
       });
-    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
-    revealables.forEach(function (el) { io.observe(el); });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    Array.prototype.forEach.call(targets, function (el) { io.observe(el); });
   } else {
-    revealables.forEach(function (el) { el.classList.add('is-in'); });
+    Array.prototype.forEach.call(targets, function (el) { el.classList.add('is-in'); });
   }
 
-  /* ---------- counters ---------- */
+  /* ---------- счётчики ---------- */
   function runCount(el) {
     var to = parseFloat(el.getAttribute('data-count'));
     var from = parseFloat(el.getAttribute('data-from') || '0');
@@ -50,8 +66,7 @@
     function step(ts) {
       if (t0 === null) t0 = ts;
       var p = Math.min((ts - t0) / dur, 1);
-      var e = 1 - Math.pow(1 - p, 3);
-      el.textContent = String(Math.round(from + (to - from) * e));
+      el.textContent = String(Math.round(from + (to - from) * (1 - Math.pow(1 - p, 3))));
       if (p < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
@@ -63,61 +78,27 @@
         if (en.isIntersecting) { runCount(en.target); io2.unobserve(en.target); }
       });
     }, { threshold: 0.6 });
-    nums.forEach(function (el) { io2.observe(el); });
+    Array.prototype.forEach.call(nums, function (el) { io2.observe(el); });
   }
 
-  /* ---------- 34-tick dial ---------- */
-  var dial = document.getElementById('dial');
-  if (dial) {
-    var N = 34, out = '';
-    for (var i = 0; i < N; i++) {
-      var a = (i / N) * Math.PI * 2 - Math.PI / 2;
-      var r1 = 88, r2 = i % 5 === 0 ? 116 : 106;
-      out += '<line x1="' + (120 + Math.cos(a) * r1).toFixed(2) + '" y1="' + (120 + Math.sin(a) * r1).toFixed(2) +
-             '" x2="' + (120 + Math.cos(a) * r2).toFixed(2) + '" y2="' + (120 + Math.sin(a) * r2).toFixed(2) + '"/>';
-    }
-    dial.setAttribute('viewBox', '0 0 240 240');
-    dial.innerHTML = out;
+  /* ---------- лёгкий параллакс рисунка первого экрана ---------- */
+  var art = document.querySelector('.hero__art');
+  if (art && !reduced) {
+    var wide = window.matchMedia('(min-width:1081px)');
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        art.style.transform = wide.matches
+          ? 'translate3d(0,' + (window.scrollY * -0.045).toFixed(1) + 'px,0)'
+          : '';
+        ticking = false;
+      });
+    }, { passive: true });
   }
 
-  /* ---------- scroll-linked motion ---------- */
-  var parallax = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
-  var ticking = false;
-  // ниже 1181px фото первого экрана стоит в потоке — сдвигать его нельзя,
-  // иначе сверху открывается пустая полоса
-  var wide = window.matchMedia('(min-width:1181px)');
-  function onScroll() {
-    if (hdr) hdr.classList.toggle('is-stuck', window.scrollY > 24);
-    if (reduced) return;
-    parallax.forEach(function (el) {
-      if (!wide.matches) { el.style.transform = ''; return; }
-      var k = parseFloat(el.getAttribute('data-parallax'));
-      el.style.transform = 'translate3d(0,' + (window.scrollY * k).toFixed(1) + 'px,0)';
-    });
-  }
-  function tick() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(function () { onScroll(); ticking = false; });
-  }
-  window.addEventListener('scroll', tick, { passive: true });
-  window.addEventListener('resize', tick);
-  onScroll();
-
-  /* ---------- product prefill ---------- */
-  var select = document.getElementById('f-product');
-  document.querySelectorAll('[data-prefill]').forEach(function (a) {
-    a.addEventListener('click', function () {
-      if (!select) return;
-      select.value = a.getAttribute('data-prefill');
-      /* Присваивание .value из скрипта не порождает событий, поэтому валидатор
-         о нём не узнаёт: под уже заполненным полем оставалась висеть красная
-         подпись «Выберите солод». Сообщаем ему сами. */
-      select.dispatchEvent(new Event('change', { bubbles: true }));
-    });
-  });
-
-  /* ---------- phone mask +7 (999) 999-99-99 ---------- */
+  /* ---------- маска телефона ---------- */
   var phone = document.getElementById('f-phone');
   function formatPhone(raw) {
     var d = raw.replace(/\D/g, '');
@@ -137,7 +118,7 @@
     phone.addEventListener('blur', function () { if (phone.value.replace(/\D/g, '').length <= 1) phone.value = ''; });
   }
 
-  /* ---------- validation + submit ---------- */
+  /* ---------- валидация и отправка ---------- */
   var form = document.getElementById('orderForm');
   if (!form) return;
   var status = document.getElementById('formStatus');
@@ -150,7 +131,7 @@
     phone: function (v) { return v.replace(/\D/g, '').length === 11 || 'Телефон в формате +7 (999) 999-99-99'; },
     company: function (v) { return v.trim().length >= 2 || 'Укажите название предприятия'; },
     region: function (v) { return v.trim().length >= 2 || 'Укажите регион поставки'; },
-    product: function (v) { return !!v || 'Выберите солод'; },
+    product: function (v) { return !!v || 'Выберите продукт'; },
     volume: function (v) {
       var n = parseFloat(String(v).replace(',', '.'));
       if (!v || isNaN(n)) return 'Укажите объём в тоннах';
@@ -165,7 +146,6 @@
     el.setAttribute('aria-invalid', msg ? 'true' : 'false');
     if (slot) slot.textContent = msg || '';
   }
-
   function checkField(el) {
     var rule = rules[el.name];
     if (!rule) return true;
@@ -173,7 +153,6 @@
     setError(el, res === true ? '' : res);
     return res === true;
   }
-
   Object.keys(rules).forEach(function (n) {
     var el = form.elements[n];
     if (!el) return;
@@ -197,7 +176,7 @@
     });
     if (!ok) {
       say('Проверьте отмеченные поля — и отправим.', 'err');
-      if (first) { first.focus({ preventScroll: false }); }
+      if (first) first.focus();
       return;
     }
 
@@ -206,8 +185,8 @@
     data.page = location.href;
 
     btn.disabled = true;
-    var old = btn.textContent;
-    btn.textContent = 'Отправляем…';
+    var old = btn.querySelector('span').textContent;
+    btn.querySelector('span').textContent = 'Отправляем…';
     say('', '');
 
     fetch(form.action, {
@@ -215,13 +194,10 @@
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(data)
     })
-      .then(function (r) {
-        if (!r.ok) throw new Error('HTTP ' + r.status);
-        return r.text();
-      })
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
       .then(function () {
         form.reset();
-        say('Заявка отправлена. Свяжемся с вами по указанным контактам и пришлём расчёт партии.', 'ok');
+        say('Заявка отправлена. Свяжемся с вами и пришлём расчёт партии.', 'ok');
       })
       .catch(function (err) {
         var body = encodeURIComponent(
@@ -230,13 +206,13 @@
           '\nПродукт: ' + data.product + '\nОбъём, т: ' + data.volume
         );
         say('Не удалось отправить заявку (' + err.message + '). Данные не потеряны — ' +
-          '<a href="mailto:info@solodrusi.ru?subject=' + encodeURIComponent('Заявка на солод') + '&body=' + body + '">отправьте письмом</a>, ' +
+          '<a href="mailto:info@solodrusi.ru?subject=' + encodeURIComponent('Расчёт партии солода') + '&body=' + body + '">отправьте письмом</a>, ' +
           'напишите в <a href="https://t.me/solodrusi" target="_blank" rel="noopener">Telegram</a> ' +
           'или позвоните <a href="tel:+78002012444">8-800-201-24-44</a>.', 'err');
       })
       .then(function () {
         btn.disabled = false;
-        btn.textContent = old;
+        btn.querySelector('span').textContent = old;
       });
   });
 })();
