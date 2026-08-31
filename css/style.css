@@ -308,8 +308,6 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.6px) rotate(-45
     animation:windBase 19s cubic-bezier(.33,0,.24,1) 2.2s infinite}
   .art--ear.is-in .spike{transform-box:view-box;transform-origin:300px 500px;
     animation:windSpike 19s cubic-bezier(.3,0,.22,1) 2.34s infinite}
-  .art--ear.is-in .awns{transform-box:view-box;transform-origin:300px 300px;
-    animation:windAwn 19s cubic-bezier(.28,0,.2,1) 2.46s infinite}
   .art--ear.is-in .leafA{transform-box:view-box;transform-origin:296px 612px;
     animation:windLeafA 19s ease-in-out 2.5s infinite}
   .art--ear.is-in .leafB{transform-box:view-box;transform-origin:304px 560px;
@@ -347,22 +345,6 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.6px) rotate(-45
     71%      {transform:rotate(.25deg)}
     77%      {transform:rotate(.7deg)}
     83%,100% {transform:rotate(0deg)}
-  }
-  @keyframes windAwn{
-    0%,7%    {transform:rotate(0deg)}
-    13%      {transform:rotate(3.2deg)}
-    17%      {transform:rotate(.7deg)}
-    21%      {transform:rotate(2.2deg)}
-    27%      {transform:rotate(.2deg)}
-    33%,42%  {transform:rotate(0deg)}
-    48%      {transform:rotate(6deg)}
-    52%      {transform:rotate(2deg)}
-    56%      {transform:rotate(4.6deg)}
-    61%      {transform:rotate(1.1deg)}
-    66%      {transform:rotate(2.4deg)}
-    72%      {transform:rotate(.3deg)}
-    78%      {transform:rotate(.9deg)}
-    84%,100% {transform:rotate(0deg)}
   }
   @keyframes windLeafA{
     0%,8%    {transform:rotate(0deg)}
