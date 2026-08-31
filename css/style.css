@@ -51,6 +51,7 @@ section[id]{scroll-margin-top:6.5rem}
 .awn{stroke-width:.85;stroke:#C89250;opacity:.6}
 .husk{fill:#F0CE99;fill-opacity:.55;stroke:var(--amber);stroke-width:.7;stroke-opacity:.5}
 .crease{stroke:#9A5F1C;stroke-width:.75;opacity:.55}
+.wrinkle{stroke:#9A5F1C;stroke-width:.6;opacity:.38}
 .f-amber-d{fill:#C0761F;fill-opacity:.95;stroke:#B06D1C}
 .stalk{stroke-width:1.4}
 .f-amber-l{fill:var(--amber-l);fill-opacity:.65;stroke:var(--amber)}
@@ -70,6 +71,12 @@ section[id]{scroll-margin-top:6.5rem}
 .nd{fill:#F0BE72;opacity:.9}
 .nd--home{fill:#F5D08E}
 .pulse{fill:none;stroke:#FBD98F;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;opacity:0}
+.mover{opacity:0}
+.truck{opacity:0}
+.mv-glow{fill:#F5C877;opacity:.22}
+.mv-ring{fill:none;stroke:#FBD98F;stroke-width:1.4;opacity:.85}
+.mv-dot{fill:#FFF3D6}
+.birds{transform-box:view-box;transform-origin:120px 44px}
 
 /* ---------- шапка ---------- */
 .hdr{position:sticky;top:0;z-index:100;background:rgba(244,243,240,.82);backdrop-filter:blur(14px);
@@ -220,7 +227,7 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.6px) rotate(-45
 .dcontacts li:hover .dc__ico{background:rgba(210,134,42,.16);transform:scale(1.06)}
 .dcontacts a{display:block;font-family:var(--disp);font-weight:600;font-size:1.12rem;color:var(--green);text-decoration:none}
 .dcontacts a:hover{color:var(--amber)}
-.dcontacts span{display:block;font-size:.78rem;color:var(--muted)}
+.dcontacts div span{display:block;font-size:.78rem;color:var(--muted)}
 .art--farm{margin-top:auto;padding-top:2rem;opacity:.5}
 .art--farm .d{stroke-width:1.1}
 
@@ -354,6 +361,12 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.6px) rotate(-45
   .prod:hover .art--grain,.prod:hover .art--wheat{transform:translateY(-5px)}
 
   /* импульс, бегущий по маршрутам доставки */
+  /* птицы медленно сносит ветром */
+  .js .is-in .birds{animation:driftBirds 22s ease-in-out infinite}
+  @keyframes driftBirds{
+    0%,100%{transform:translate(0,0)}
+    50%{transform:translate(26px,-8px)}
+  }
   .js .is-in .pulse{animation:runPulse 3.4s linear 3.2s infinite}
   .js .is-in .pulse--b{animation-delay:4.4s;animation-duration:2.6s}
   @keyframes runPulse{
@@ -400,7 +413,7 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.6px) rotate(-45
   /* меньше 16px — Safari зумит страницу при фокусе */
   .field input,.field select{font-size:16px;padding:.82rem .9rem}
   .dcontacts a{min-height:44px;display:flex;align-items:center}
-  .dcontacts span{margin-top:-.3rem}
+  .dcontacts div span{margin-top:-.3rem}
   .prod__note{max-width:60%}
   .specs{max-width:none}
 }

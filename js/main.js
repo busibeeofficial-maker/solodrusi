@@ -115,6 +115,17 @@
     }, { passive: true });
   }
 
+  // SMIL не подчиняется prefers-reduced-motion — снимаем вручную
+  if (reduced) {
+    Array.prototype.forEach.call(
+      document.querySelectorAll('animate, animateMotion, animateTransform'),
+      function (el) { el.remove(); }
+    );
+    Array.prototype.forEach.call(document.querySelectorAll('.mover, .truck'), function (el) {
+      el.style.opacity = '';
+    });
+  }
+
   /* ---------- маска телефона ---------- */
   var phone = document.getElementById('f-phone');
   function formatPhone(raw) {
