@@ -160,7 +160,7 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.6px) rotate(-45
 .specs>div{display:flex;justify-content:space-between;gap:1.2rem;padding:.62rem 0;border-bottom:1px solid var(--line-soft)}
 .specs dt{color:var(--muted);font-size:.86rem;flex:none}
 .specs dd{margin:0;font-size:.86rem;text-align:right;font-weight:500}
-.prod__note{position:relative;z-index:1;margin:1.1rem 0 0;font-size:.8rem;line-height:1.5;color:var(--muted);max-width:26rem}
+.prod__note{position:relative;z-index:1;margin:1.1rem 0 0;font-size:.8rem;line-height:1.5;color:var(--muted);max-width:min(26rem,64%)}
 .art--grain,.art--wheat{position:absolute;right:-3%;bottom:4%;width:min(40%,168px);pointer-events:none}
 .prod:hover .blueprint{opacity:1}
 .prod .blueprint{transition:opacity .4s}
