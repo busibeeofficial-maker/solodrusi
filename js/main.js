@@ -30,15 +30,21 @@
   /* ---------- подготовка линейной графики к прорисовке ---------- */
   // каждой линии задаём её собственную длину и небольшую задержку,
   // чтобы рисунок собирался по частям, а не появлялся целиком
-  Array.prototype.forEach.call(document.querySelectorAll('.art'), function (art) {
+  Array.prototype.forEach.call(document.querySelectorAll('.art, .ico'), function (art) {
+    var isIcon = art.classList.contains('ico');
     var paths = art.querySelectorAll('.d');
     Array.prototype.forEach.call(paths, function (p, i) {
       var len;
       try { len = p.getTotalLength(); } catch (e) { len = 0; }
       if (!len || !isFinite(len)) len = 600;
       p.style.setProperty('--len', Math.ceil(len + 2));
-      var isBlueprint = !!p.closest('.blueprint');
-      p.style.setProperty('--dl', isBlueprint ? i * 45 : 380 + i * 70);
+      if (isIcon) {
+        // иконка собирается штрих за штрихом
+        p.style.setProperty('--dl', 260 + i * 120);
+      } else {
+        var isBlueprint = !!p.closest('.blueprint');
+        p.style.setProperty('--dl', isBlueprint ? i * 45 : 380 + i * 70);
+      }
     });
   });
 
