@@ -48,7 +48,10 @@ section[id]{scroll-margin-top:6.5rem}
 .fine{stroke:#A8681F;stroke-width:.9;opacity:.55}
 .vein{stroke:#A8681F;stroke-width:.8;opacity:.45}
 .f-green + .vein{stroke:#EAF0EC;opacity:.35}
-.awn{stroke-width:1}
+.awn{stroke-width:.85;stroke:#C89250;opacity:.6}
+.husk{fill:#F0CE99;fill-opacity:.55;stroke:var(--amber);stroke-width:.7;stroke-opacity:.5}
+.crease{stroke:#9A5F1C;stroke-width:.75;opacity:.55}
+.f-amber-d{fill:#C0761F;fill-opacity:.95;stroke:#B06D1C}
 .stalk{stroke-width:1.4}
 .f-amber-l{fill:var(--amber-l);fill-opacity:.65;stroke:var(--amber)}
 .f-green{fill:var(--green);fill-opacity:.92;stroke:var(--green)}
@@ -251,12 +254,15 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.6px) rotate(-45
   .js .is-in .ico .d{stroke-dashoffset:0;
     transition:stroke-dashoffset 1.5s var(--ease);transition-delay:calc(var(--dl,0) * 1ms)}
   .js .is-in .ico .d{transition-duration:.65s}
-  .js .art .f-amber,.js .art .f-amber-l,.js .art .f-green{fill-opacity:0;transition:fill-opacity .7s ease}
+  .js .art .f-amber,.js .art .f-amber-l,.js .art .f-green,.js .art .f-amber-d,.js .art .husk{fill-opacity:0;transition:fill-opacity .7s ease}
   .js .is-in .art .f-amber{fill-opacity:.92}
   .js .is-in .art .f-amber-l{fill-opacity:.8}
   .js .is-in .art .f-green{fill-opacity:.92}
-  .js .is-in .art .f-amber,.js .is-in .art .f-amber-l,.js .is-in .art .f-green{
-    transition-delay:calc(.45s + var(--k,0) * 55ms)}
+  .js .is-in .art .f-amber-d{fill-opacity:.95}
+  .js .is-in .art .husk{fill-opacity:.55}
+  .js .is-in .art .f-amber,.js .is-in .art .f-amber-l,.js .is-in .art .f-green,
+  .js .is-in .art .f-amber-d,.js .is-in .art .husk{
+    transition-delay:calc(.45s + var(--k,0) * 40ms)}
 
   /* лист вырастает от основания */
   .js .art .lf > path{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(.35) scaleX(.7);opacity:0;
@@ -309,7 +315,7 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.6px) rotate(-45
     85%,100%{transform:rotate(0deg)}
   }
   /* ости отзываются чуть резче и с запозданием */
-  .art--ear.is-in .awn{transform-box:view-box;transform-origin:300px 200px;
+  .art--ear.is-in .awns{transform-box:view-box;transform-origin:300px 470px;
     animation:windAwn 17s cubic-bezier(.37,0,.63,1) 2.55s infinite}
   @keyframes windAwn{
     0%,6%   {transform:rotate(0deg)}

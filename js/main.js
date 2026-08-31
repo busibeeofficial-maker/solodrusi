@@ -42,8 +42,10 @@
         // иконка собирается штрих за штрихом
         p.style.setProperty('--dl', 260 + i * 120);
       } else {
+        // шаг задержки маленький и с потолком: в колосе под сотню линий,
+        // иначе последние ости дорисовывались бы через шесть секунд
         var isBlueprint = !!p.closest('.blueprint');
-        p.style.setProperty('--dl', isBlueprint ? i * 45 : 380 + i * 70);
+        p.style.setProperty('--dl', isBlueprint ? i * 40 : 280 + Math.min(i, 56) * 24);
       }
     });
   });
