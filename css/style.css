@@ -46,14 +46,21 @@ section[id]{scroll-margin-top:6.5rem}
 .blueprint .dash{stroke-dasharray:5 7;opacity:.42}
 .f-amber{fill:var(--amber);fill-opacity:.92;stroke:var(--amber)}
 .fine{stroke:#A8681F;stroke-width:.9;opacity:.55}
-.vein{stroke:#A8681F;stroke-width:.8;opacity:.45}
+.vein{stroke:#8E5A1B;stroke-width:.8;opacity:.45}
 .f-green + .vein{stroke:#EAF0EC;opacity:.35}
 .awn{stroke-width:.85;stroke:#C89250;opacity:.6}
 .husk{fill:#F0CE99;fill-opacity:.55;stroke:var(--amber);stroke-width:.7;stroke-opacity:.5}
 .crease{stroke:#9A5F1C;stroke-width:.75;opacity:.55}
 .wrinkle{stroke:#9A5F1C;stroke-width:.6;opacity:.38}
 .f-amber-d{fill:#C0761F;fill-opacity:.95;stroke:#B06D1C}
-.stalk{stroke-width:1.4}
+.stalk{fill:var(--amber);fill-opacity:.95;stroke:#A96E22;stroke-width:.8}
+.stalk-hi{stroke:#EFC183;stroke-width:.7;opacity:.5}
+.node{stroke:#A96E22;stroke-width:1.1;opacity:.85}
+.sheath{fill:#D8A053;fill-opacity:.85;stroke:#A96E22;stroke-width:.7}
+.fold-g{fill:var(--green-d);fill-opacity:.32;stroke:none}
+.fold-a{fill:#C88A34;fill-opacity:.3;stroke:none}
+.vein2{stroke:#8E5A1B;stroke-width:.45;opacity:.25}
+.f-green,.f-amber-l{stroke-width:.85}
 .f-amber-l{fill:var(--amber-l);fill-opacity:.65;stroke:var(--amber)}
 .f-green{fill:var(--green);fill-opacity:.92;stroke:var(--green)}
 .ico{width:30px;height:30px;flex:none}
@@ -261,12 +268,17 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.6px) rotate(-45
   .js .is-in .ico .d{stroke-dashoffset:0;
     transition:stroke-dashoffset 1.5s var(--ease);transition-delay:calc(var(--dl,0) * 1ms)}
   .js .is-in .ico .d{transition-duration:.65s}
-  .js .art .f-amber,.js .art .f-amber-l,.js .art .f-green,.js .art .f-amber-d,.js .art .husk{fill-opacity:0;transition:fill-opacity .7s ease}
+  .js .art .f-amber,.js .art .f-amber-l,.js .art .f-green,.js .art .f-amber-d,.js .art .husk,
+  .js .art .stalk,.js .art .sheath,.js .art .fold-g,.js .art .fold-a{fill-opacity:0;transition:fill-opacity .7s ease}
   .js .is-in .art .f-amber{fill-opacity:.92}
   .js .is-in .art .f-amber-l{fill-opacity:.8}
   .js .is-in .art .f-green{fill-opacity:.92}
   .js .is-in .art .f-amber-d{fill-opacity:.95}
   .js .is-in .art .husk{fill-opacity:.55}
+  .js .is-in .art .stalk{fill-opacity:.95}
+  .js .is-in .art .sheath{fill-opacity:.85}
+  .js .is-in .art .fold-g{fill-opacity:.32}
+  .js .is-in .art .fold-a{fill-opacity:.3}
   .js .is-in .art .f-amber,.js .is-in .art .f-amber-l,.js .is-in .art .f-green,
   .js .is-in .art .f-amber-d,.js .is-in .art .husk{
     transition-delay:calc(.45s + var(--k,0) * 40ms)}
