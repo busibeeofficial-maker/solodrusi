@@ -113,25 +113,6 @@
     }, { passive: true });
   }
 
-  /* ---------- рисунок первого экрана слегка следует за курсором ---------- */
-  if (art && !reduced && window.matchMedia('(hover:hover)').matches) {
-    var bp = art.querySelector('.blueprint');
-    var earG = art.querySelector('.ear');
-    var raf = null, tx = 0, ty = 0;
-    document.querySelector('.hero').addEventListener('mousemove', function (e) {
-      var r = art.getBoundingClientRect();
-      tx = ((e.clientX - (r.left + r.width / 2)) / r.width) * 2;
-      ty = ((e.clientY - (r.top + r.height / 2)) / r.height) * 2;
-      if (raf) return;
-      raf = requestAnimationFrame(function () {
-        if (bp) bp.style.setProperty('--mx', (tx * 9).toFixed(2) + 'px');
-        if (bp) bp.style.setProperty('--my', (ty * 9).toFixed(2) + 'px');
-        if (earG) earG.style.setProperty('--ex', (tx * -4).toFixed(2) + 'px');
-        raf = null;
-      });
-    });
-  }
-
   /* ---------- маска телефона ---------- */
   var phone = document.getElementById('f-phone');
   function formatPhone(raw) {
