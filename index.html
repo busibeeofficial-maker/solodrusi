@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=202608312324">
+<link rel="stylesheet" href="css/style.css?v=202609021459">
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -69,38 +69,35 @@
       <p class="hero__sub" style="--i:1">Собственное производство в Венёве Тульской области.<br>Работаем с 2009 года, поставляем заводам по всей России.</p>
 
       <ul class="feats" style="--i:2">
-        <li>
-          <span class="feat__ico"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true">
-            <path class="d" d="M25 8h14"/>
-            <path class="d" d="M27.5 9v16.5L15 47.5a5 5 0 0 0 4.3 7.5h25.4a5 5 0 0 0 4.3-7.5L36.5 25.5V9"/>
-            <path class="d" d="M20.6 40.5h22.8"/>
-            <circle class="d" cx="28" cy="46" r="2.6"/>
-            <circle class="d" cx="36.5" cy="49.5" r="1.7"/>
-            <circle class="d" cx="33" cy="43" r="1.1"/>
-            <path class="d" d="M31 15h-3.5M31 20h-3.5"/>
-          </svg></span>
+        <li style="--j:0">
+          <span class="feat__ico">
+            <svg class="ico" viewBox="0 0 48 48" aria-hidden="true">
+              <path class="d" d="M19 7h10"/>
+              <path class="d" d="M21 8v13.5L12.5 36a3.4 3.4 0 0 0 3 5.2h17a3.4 3.4 0 0 0 3-5.2L27 21.5V8"/>
+              <path class="d" d="M16.4 31h15.2"/>
+            </svg>
+          </span>
           <p>Лабораторный контроль до 34 показателей по EBC, VLB, MEBAK</p>
         </li>
-        <li>
-          <span class="feat__ico"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true">
-            <path class="d" d="M9 19h46M9 32h46M9 45h46"/>
-            <circle class="d" cx="23" cy="19" r="5.4"/>
-            <circle class="d" cx="41" cy="32" r="5.4"/>
-            <circle class="d" cx="28" cy="45" r="5.4"/>
-            <path class="d" d="M23 11.5v-3M41 24.5v-3M28 37.5v-3"/>
-          </svg></span>
+        <li style="--j:1">
+          <span class="feat__ico">
+            <svg class="ico" viewBox="0 0 48 48" aria-hidden="true">
+              <path class="d" d="M8 17h32M8 31h32"/>
+              <circle class="d" cx="19" cy="17" r="4.4"/>
+              <circle class="d" cx="31" cy="31" r="4.4"/>
+            </svg>
+          </span>
           <p>Производство солода под требования заказчика</p>
         </li>
-        <li>
-          <span class="feat__ico"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true">
-            <path class="d" d="M5 17h30v27H5z"/>
-            <path class="d" d="M35 25h11l8 9v10H35z"/>
-            <path class="d" d="M38 28h6.5l4.6 5.2H38z"/>
-            <circle class="d" cx="17" cy="48" r="4.6"/>
-            <circle class="d" cx="45" cy="48" r="4.6"/>
-            <path class="d" d="M21.6 48H40.4M5 44h4M53 44h1"/>
-            <path class="d" d="M2 24h-9M4 31h-7M2 38h-9" transform="translate(9)"/>
-          </svg></span>
+        <li style="--j:2">
+          <span class="feat__ico">
+            <svg class="ico" viewBox="0 0 48 48" aria-hidden="true">
+              <path class="d" d="M5 13h22v20H5z"/>
+              <path class="d" d="M27 20h8l6 7v6h-14z"/>
+              <circle class="d" cx="15" cy="36" r="3.4"/>
+              <circle class="d" cx="34" cy="36" r="3.4"/>
+            </svg>
+          </span>
           <p>Отгрузка от 5 тонн в мешках или насыпью</p>
         </li>
       </ul>
@@ -156,71 +153,46 @@
 
       <div class="prods">
         <article class="prod" style="--i:1">
-          <div class="prod__head">
-            <h3>Светлый ячменный солод</h3>
-            <span class="chip">Базовый</span>
+          <div class="prod__ph">
+            <picture>
+              <source media="(max-width:1120px)" srcset="assets/img/product-barley-600.jpg">
+              <img src="assets/img/product-barley.jpg" alt="Светлый ячменный солод: зерно" width="800" height="1000" loading="lazy" decoding="async">
+            </picture>
           </div>
-          <dl class="specs">
-            <div><dt>Цветность</dt><dd>3–4 EBC</dd></div>
-            <div><dt>Белок</dt><dd>10,0–11,0 %</dd></div>
-            <div><dt>Экстрактивность</dt><dd>&gt; 81,0 %</dd></div>
-            <div><dt>Доля в засыпи</dt><dd>до 100 %</dd></div>
-          </dl>
-          <p class="prod__note">Базовый солод для светлых сортов. Может составлять до 100 % засыпи или использоваться вместе со спецсолодами. Даёт лёгкие зерновые оттенки.</p>
-          <svg class="art art--grain" viewBox="0 0 260 260" aria-hidden="true">
-          <g class="blueprint">
-            <path class="d" d="M130 16v230"/>
-            <path class="d" d="M34 104h32M194 104h32M34 182h32M194 182h32"/>
-            <path class="d" d="M46 56h26v26M214 214h-26v-26"/>
-            <path class="d" d="M30 140h22M41 129v22M208 140h22M219 129v22"/>
-          </g>
-          <g class="ear">
-          <g class="lf" style="--k:0" transform="translate(130 236) rotate(0)"><path class="d f-amber" d="M-5.9 -3.8C-27.5 -35.3 -25.4 -85.7 -3.2 -126C14.0 -90.7 18.9 -40.3 5.4 -3.8Q0 3.8 -5.9 -3.8Z"/><path class="d husk" d="M-1.6 -10.1C-16.7 -37.8 -15.7 -83.2 -3.2 -115.9C2.7 -83.2 4.9 -40.3 -1.6 -10.1Z"/><path class="d crease" d="M-2.2 -12.6C-7.6 -45.4 -6.5 -85.7 -3.5 -115.9"/><path class="d wrinkle" d="M-12.0 -25.2Q0 -29.6 8.7 -24.2 M-15.3 -41.6Q0 -46.0 11.0 -40.6 M-16.7 -58.0Q0 -62.4 12.0 -57.0 M-16.3 -74.3Q0 -78.7 11.8 -73.3 M-14.2 -90.7Q0 -95.1 10.3 -89.7"/><path class="d crease" d="M-11.9 -16.4C-4.9 -26.5 2.7 -25.2 8.6 -15.1"/><path class="d awn" transform="translate(-3.2 -126)" d="M0 0C0.0 -34.6 0.0 -69.1 0.0 -96"/></g>
-          <g class="lf" style="--k:1" transform="translate(82 238) rotate(-17)"><path class="d f-amber-l" d="M-4.6 -2.8C-21.4 -26.3 -19.7 -63.9 -2.5 -94C10.9 -67.7 14.7 -30.1 4.2 -2.8Q0 2.8 -4.6 -2.8Z"/><path class="d husk" d="M-1.3 -7.5C-13.0 -28.2 -12.2 -62.0 -2.5 -86.5C2.1 -62.0 3.8 -30.1 -1.3 -7.5Z"/><path class="d crease" d="M-1.7 -9.4C-5.9 -33.8 -5.0 -63.9 -2.7 -86.5"/><path class="d wrinkle" d="M-9.4 -18.8Q0 -22.1 6.7 -18.0 M-11.9 -31.0Q0 -34.3 8.5 -30.3 M-13.0 -43.2Q0 -46.5 9.3 -42.5 M-12.7 -55.5Q0 -58.7 9.1 -54.7 M-11.1 -67.7Q0 -71.0 8.0 -66.9"/><path class="d crease" d="M-9.2 -12.2C-3.8 -19.7 2.1 -18.8 6.7 -11.3"/><path class="d awn" transform="translate(-2.5 -94)" d="M0 0C-1.1 -20.9 -4.1 -41.8 -7.1 -58"/></g>
-          <g class="lf" style="--k:2" transform="translate(178 238) rotate(17)"><path class="d f-amber-d" d="M-4.6 -2.8C-21.4 -26.3 -19.7 -63.9 -2.5 -94C10.9 -67.7 14.7 -30.1 4.2 -2.8Q0 2.8 -4.6 -2.8Z"/><path class="d husk" d="M-1.3 -7.5C-13.0 -28.2 -12.2 -62.0 -2.5 -86.5C2.1 -62.0 3.8 -30.1 -1.3 -7.5Z"/><path class="d crease" d="M-1.7 -9.4C-5.9 -33.8 -5.0 -63.9 -2.7 -86.5"/><path class="d wrinkle" d="M-9.4 -18.8Q0 -22.1 6.7 -18.0 M-11.9 -31.0Q0 -34.3 8.5 -30.3 M-13.0 -43.2Q0 -46.5 9.3 -42.5 M-12.7 -55.5Q0 -58.7 9.1 -54.7 M-11.1 -67.7Q0 -71.0 8.0 -66.9"/><path class="d crease" d="M-9.2 -12.2C-3.8 -19.7 2.1 -18.8 6.7 -11.3"/><path class="d awn" transform="translate(-2.5 -94)" d="M0 0C1.1 -20.9 4.1 -41.8 7.1 -58"/></g>
-          </g>
-          </svg>
+          <div class="prod__body">
+            <div class="prod__head">
+              <h3>Светлый ячменный солод</h3>
+              <span class="chip">Базовый</span>
+            </div>
+            <dl class="specs">
+              <div><dt>Цветность</dt><dd>3–4 EBC</dd></div>
+              <div><dt>Белок</dt><dd>10,0–11,0 %</dd></div>
+              <div><dt>Экстрактивность</dt><dd>&gt; 81,0 %</dd></div>
+              <div><dt>Доля в засыпи</dt><dd>до 100 %</dd></div>
+            </dl>
+            <p class="prod__note">Базовый солод для светлых сортов. Может составлять до 100 % засыпи или использоваться вместе со спецсолодами. Даёт лёгкие зерновые оттенки.</p>
+          </div>
         </article>
 
         <article class="prod" style="--i:2">
-          <div class="prod__head">
-            <h3>Светлый пшеничный солод</h3>
+          <div class="prod__ph">
+            <picture>
+              <source media="(max-width:1120px)" srcset="assets/img/product-wheat-600.jpg">
+              <img src="assets/img/product-wheat.jpg" alt="Светлый пшеничный солод: зерно и колосья" width="1000" height="1000" loading="lazy" decoding="async">
+            </picture>
           </div>
-          <span class="chip chip--soft">Для пшеничного пива</span>
-          <dl class="specs">
-            <div><dt>Цветность</dt><dd>3–5 EBC</dd></div>
-            <div><dt>Сырьё</dt><dd>Французская пивоваренная<br>пшеница сорта «Канюк»</dd></div>
-            <div><dt>Происхождение сырья</dt><dd>Тульская и Рязанская области</dd></div>
-          </dl>
-          <p class="prod__note">Применяется для пшеничных сортов пива: вайсбир, витбир.</p>
-          <svg class="art art--wheat" viewBox="0 -16 260 276" aria-hidden="true">
-          <g class="blueprint">
-            <path class="d" d="M130 10v238"/>
-            <path class="d" d="M34 84h34M192 84h34M34 168h34M192 168h34"/>
-            <path class="d" d="M44 46h24v24M216 210h-24v-24"/>
-            <path class="d" d="M30 126h22M41 115v22"/>
-          </g>
-          <g class="ear">
-          <path class="d stalk" d="M130 250C126 214 129 190 130 166C131 130 129 96 130 62"/>
-          <g class="lf" style="--k:0" transform="translate(130 190) rotate(-20)"><path class="d f-amber" d="M0 0C12.7 -9.9 13.8 -31.0 6.8 -52.1C3.9 -58.9 -1.6 -61.4 -3.9 -62.0C-4.4 -40.9 -9.1 -14.9 0 0Z"/><path class="d husk" d="M-1.3 -3.7C6.2 -14.9 6.5 -34.7 1.3 -53.3C-2.1 -37.2 -5.7 -16.1 -1.3 -3.7Z"/><path class="d crease" d="M0.8 -6.2C4.4 -23.6 3.9 -40.9 5.7 -53.3"/></g>
-          <g class="lf" style="--k:1" transform="translate(130 190) rotate(20)"><path class="d f-amber" d="M0 0C-12.7 -9.9 -13.8 -31.0 -6.8 -52.1C-3.9 -58.9 1.6 -61.4 3.9 -62.0C4.4 -40.9 9.1 -14.9 0 0Z"/><path class="d husk" d="M1.3 -3.7C-6.2 -14.9 -6.5 -34.7 -1.3 -53.3C2.1 -37.2 5.7 -16.1 1.3 -3.7Z"/><path class="d crease" d="M-0.8 -6.2C-4.4 -23.6 -3.9 -40.9 -5.7 -53.3"/></g>
-          <g class="lf" style="--k:2" transform="translate(130 168) rotate(-18)"><path class="d f-amber-d" d="M0 0C12.2 -9.4 13.1 -29.5 6.4 -49.6C3.7 -56.0 -1.5 -58.4 -3.7 -59.0C-4.2 -38.9 -8.7 -14.2 0 0Z"/><path class="d husk" d="M-1.2 -3.5C6.0 -14.2 6.2 -33.0 1.2 -50.7C-2.0 -35.4 -5.5 -15.3 -1.2 -3.5Z"/><path class="d crease" d="M0.7 -5.9C4.2 -22.4 3.7 -38.9 5.5 -50.7"/></g>
-          <g class="lf" style="--k:3" transform="translate(130 168) rotate(18)"><path class="d f-amber-d" d="M0 0C-12.2 -9.4 -13.1 -29.5 -6.4 -49.6C-3.7 -56.0 1.5 -58.4 3.7 -59.0C4.2 -38.9 8.7 -14.2 0 0Z"/><path class="d husk" d="M1.2 -3.5C-6.0 -14.2 -6.2 -33.0 -1.2 -50.7C2.0 -35.4 5.5 -15.3 1.2 -3.5Z"/><path class="d crease" d="M-0.7 -5.9C-4.2 -22.4 -3.7 -38.9 -5.5 -50.7"/></g>
-          <g class="lf" style="--k:4" transform="translate(130 146) rotate(-16)"><path class="d f-amber" d="M0 0C11.6 -9.0 12.5 -28.0 6.1 -47.0C3.5 -53.2 -1.4 -55.4 -3.5 -56.0C-4.0 -37.0 -8.3 -13.4 0 0Z"/><path class="d husk" d="M-1.2 -3.4C5.7 -13.4 5.9 -31.4 1.2 -48.2C-1.9 -33.6 -5.2 -14.6 -1.2 -3.4Z"/><path class="d crease" d="M0.7 -5.6C4.0 -21.3 3.5 -37.0 5.2 -48.2"/></g>
-          <g class="lf" style="--k:5" transform="translate(130 146) rotate(16)"><path class="d f-amber" d="M0 0C-11.6 -9.0 -12.5 -28.0 -6.1 -47.0C-3.5 -53.2 1.4 -55.4 3.5 -56.0C4.0 -37.0 8.3 -13.4 0 0Z"/><path class="d husk" d="M1.2 -3.4C-5.7 -13.4 -5.9 -31.4 -1.2 -48.2C1.9 -33.6 5.2 -14.6 1.2 -3.4Z"/><path class="d crease" d="M-0.7 -5.6C-4.0 -21.3 -3.5 -37.0 -5.2 -48.2"/></g>
-          <g class="lf" style="--k:6" transform="translate(130 124) rotate(-15)"><path class="d f-amber-d" d="M0 0C11.0 -8.5 11.9 -26.5 5.8 -44.5C3.4 -50.3 -1.3 -52.5 -3.4 -53.0C-3.8 -35.0 -7.8 -12.7 0 0Z"/><path class="d husk" d="M-1.1 -3.2C5.4 -12.7 5.6 -29.7 1.1 -45.6C-1.8 -31.8 -4.9 -13.8 -1.1 -3.2Z"/><path class="d crease" d="M0.7 -5.3C3.8 -20.1 3.4 -35.0 4.9 -45.6"/></g>
-          <g class="lf" style="--k:7" transform="translate(130 124) rotate(15)"><path class="d f-amber-d" d="M0 0C-11.0 -8.5 -11.9 -26.5 -5.8 -44.5C-3.4 -50.3 1.3 -52.5 3.4 -53.0C3.8 -35.0 7.8 -12.7 0 0Z"/><path class="d husk" d="M1.1 -3.2C-5.4 -12.7 -5.6 -29.7 -1.1 -45.6C1.8 -31.8 4.9 -13.8 1.1 -3.2Z"/><path class="d crease" d="M-0.7 -5.3C-3.8 -20.1 -3.4 -35.0 -4.9 -45.6"/></g>
-          <g class="lf" style="--k:8" transform="translate(130 102) rotate(-13)"><path class="d f-amber" d="M0 0C10.4 -8.0 11.2 -25.0 5.5 -42.0C3.2 -47.5 -1.3 -49.5 -3.2 -50.0C-3.6 -33.0 -7.4 -12.0 0 0Z"/><path class="d husk" d="M-1.1 -3.0C5.1 -12.0 5.3 -28.0 1.1 -43.0C-1.7 -30.0 -4.7 -13.0 -1.1 -3.0Z"/><path class="d crease" d="M0.6 -5.0C3.6 -19.0 3.2 -33.0 4.7 -43.0"/></g>
-          <g class="lf" style="--k:9" transform="translate(130 102) rotate(13)"><path class="d f-amber" d="M0 0C-10.4 -8.0 -11.2 -25.0 -5.5 -42.0C-3.2 -47.5 1.3 -49.5 3.2 -50.0C3.6 -33.0 7.4 -12.0 0 0Z"/><path class="d husk" d="M1.1 -3.0C-5.1 -12.0 -5.3 -28.0 -1.1 -43.0C1.7 -30.0 4.7 -13.0 1.1 -3.0Z"/><path class="d crease" d="M-0.6 -5.0C-3.6 -19.0 -3.2 -33.0 -4.7 -43.0"/></g>
-          <g class="lf" style="--k:10" transform="translate(130 80) rotate(-11)"><path class="d f-amber-d" d="M0 0C9.8 -7.5 10.6 -23.5 5.2 -39.5C3.0 -44.6 -1.2 -46.5 -3.0 -47.0C-3.4 -31.0 -7.0 -11.3 0 0Z"/><path class="d husk" d="M-1.0 -2.8C4.8 -11.3 5.0 -26.3 1.0 -40.4C-1.6 -28.2 -4.4 -12.2 -1.0 -2.8Z"/><path class="d crease" d="M0.6 -4.7C3.4 -17.9 3.0 -31.0 4.4 -40.4"/></g>
-          <g class="lf" style="--k:11" transform="translate(130 80) rotate(11)"><path class="d f-amber-d" d="M0 0C-9.8 -7.5 -10.6 -23.5 -5.2 -39.5C-3.0 -44.6 1.2 -46.5 3.0 -47.0C3.4 -31.0 7.0 -11.3 0 0Z"/><path class="d husk" d="M1.0 -2.8C-4.8 -11.3 -5.0 -26.3 -1.0 -40.4C1.6 -28.2 4.4 -12.2 1.0 -2.8Z"/><path class="d crease" d="M-0.6 -4.7C-3.4 -17.9 -3.0 -31.0 -4.4 -40.4"/></g>
-          <g class="lf" style="--k:12" transform="translate(130 60)"><path class="d f-amber" d="M0 0C-9.8 -6.4 -10.6 -20.0 -5.2 -33.6C-3.0 -38.0 1.2 -39.6 3.0 -40C3.4 -26.4 7.0 -9.6 0 0Z"/><path class="d husk" d="M1.0 -2.4C-4.8 -9.6 -5.0 -22.4 -1.0 -34.4C1.6 -24.0 4.4 -10.4 1.0 -2.4Z"/><path class="d crease" d="M-0.6 -4.0C-3.4 -15.2 -3.0 -26.4 -4.4 -34.4"/></g>
-          <path class="d awn" d="M133 22C131.1 10 128.8 2 127.1 -6"/>
-          <path class="d awn" d="M133 22C133.0 10 133.0 2 133.0 -6"/>
-          <path class="d awn" d="M133 22C134.9 10 137.2 2 138.9 -6"/>
-          <g class="awns"><path class="d awn" d="M105 133C98.9 106.4 86.4 81.3 73.9 59.1"/><path class="d awn" d="M155 133C161.1 106.4 173.6 81.3 186.1 59.1"/><path class="d awn" d="M108 113C102.6 88.3 91.7 64.8 80.9 44.1"/><path class="d awn" d="M152 113C157.4 88.3 168.3 64.8 179.1 44.1"/><path class="d awn" d="M111 93C106.1 70.2 96.8 48.5 87.4 29.3"/><path class="d awn" d="M149 93C153.9 70.2 163.2 48.5 172.6 29.3"/><path class="d awn" d="M113 74C109.4 52.3 101.5 32.3 93.6 14.6"/><path class="d awn" d="M147 74C150.6 52.3 158.5 32.3 166.4 14.6"/><path class="d awn" d="M116 54C112.5 34.5 105.9 16.1 99.3 -0.1"/><path class="d awn" d="M144 54C147.5 34.5 154.1 16.1 160.7 -0.1"/><path class="d awn" d="M118 34C115.4 16.8 110.0 0.1 104.6 -14.6"/><path class="d awn" d="M142 34C144.6 16.8 150.0 0.1 155.4 -14.6"/></g>
-          </g>
-          </svg>
+          <div class="prod__body">
+            <div class="prod__head">
+              <h3>Светлый пшеничный солод</h3>
+              <span class="chip chip--soft">Для пшеничного пива</span>
+            </div>
+            <dl class="specs">
+              <div><dt>Цветность</dt><dd>3–5 EBC</dd></div>
+              <div><dt>Сырьё</dt><dd>Французская пивоваренная<br>пшеница сорта «Канюк»</dd></div>
+              <div><dt>Происхождение сырья</dt><dd>Тульская и Рязанская области</dd></div>
+            </dl>
+            <p class="prod__note">Применяется для пшеничных сортов пива: вайсбир, витбир.</p>
+          </div>
         </article>
       </div>
     </div>
@@ -473,6 +445,6 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"ООО «Солод Руси»","description":"Производитель солода для пивоваренных заводов России.","foundingDate":"2009","email":"info@solodrusi.ru","telephone":"+7-800-201-24-44","address":{"@type":"PostalAddress","addressLocality":"Москва","addressCountry":"RU"},"sameAs":["https://t.me/solodrusi"]}
 </script>
-<script src="js/main.js?v=202608312324" defer></script>
+<script src="js/main.js?v=202609021459" defer></script>
 </body>
 </html>
