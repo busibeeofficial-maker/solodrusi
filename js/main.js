@@ -50,6 +50,32 @@
     });
   });
 
+  /* ---------- длина контура карты ----------
+     у .map включён vector-effect:non-scaling-stroke, поэтому штрих живёт
+     в экранных пикселях, а getTotalLength() возвращает единицы viewBox.
+     Пока карта была меньше своего viewBox, разницы не было видно; на крупной
+     карте штриха не хватало на весь контур и хвост оставался недорисованным. */
+  function tuneMapLen() {
+    Array.prototype.forEach.call(document.querySelectorAll('.art--map'), function (svg) {
+      var vb = svg.viewBox && svg.viewBox.baseVal ? svg.viewBox.baseVal.width : 0;
+      var w = svg.getBoundingClientRect().width;
+      if (!vb || !w) return;
+      var scale = w / vb;
+      Array.prototype.forEach.call(svg.querySelectorAll('.map'), function (p) {
+        var len;
+        try { len = p.getTotalLength(); } catch (e) { return; }
+        if (!len || !isFinite(len)) return;
+        p.style.setProperty('--len', Math.ceil(len * scale + 6));
+      });
+    });
+  }
+  tuneMapLen();
+  var mapTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(mapTimer);
+    mapTimer = setTimeout(tuneMapLen, 180);
+  });
+
   /* ---------- появление ---------- */
   var targets = document.querySelectorAll('[data-anim], .art');
   if ('IntersectionObserver' in window && !reduced) {
