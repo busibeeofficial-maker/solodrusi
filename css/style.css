@@ -125,7 +125,7 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.6px) rotate(-45
 
 /* ---------- первый экран ---------- */
 .hero{padding:clamp(1.6rem,3.4vh,3rem) 0 clamp(1.6rem,3vw,2.6rem);min-height:min(74vh,680px)}
-.hero__in{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(1.5rem,3vw,2.6rem);align-items:start}
+.hero__in{display:grid;grid-template-columns:minmax(0,1.38fr) minmax(0,.62fr);gap:clamp(1.5rem,3vw,2.6rem);align-items:center}
 .hero__title{font-size:clamp(2.05rem,1rem + 3.2vw,3.8rem);line-height:1.06;letter-spacing:-.022em;text-wrap:balance}
 .hero__sub{margin:clamp(1rem,1.7vw,1.5rem) 0 0;color:var(--muted);font-size:clamp(1rem,.95rem + .36vw,1.28rem);line-height:1.5;max-width:48ch}
 .feats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.65rem,1vw,1rem);margin-top:clamp(1.7rem,3vw,2.6rem)}
@@ -140,7 +140,7 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.6px) rotate(-45
 .feats li:hover .feat__ico{background:rgba(210,134,42,.14);border-color:rgba(210,134,42,.55)}
 .feats p{margin:0;font-size:clamp(.88rem,.83rem + .24vw,1.02rem);line-height:1.5;color:var(--ink);text-wrap:pretty}
 .hero__art{position:relative}
-.art--ear{max-width:min(100%,380px);margin-inline:auto}
+.art--ear{max-width:min(100%,330px);margin-inline:auto}
 
 /* ---------- секции и панели ---------- */
 .section{padding:clamp(1rem,2vw,1.6rem) 0}
