@@ -124,23 +124,23 @@ body.menu-open .burger span:nth-child(2){opacity:0}
 body.menu-open .burger span:nth-child(3){transform:translateY(-6.6px) rotate(-45deg)}
 
 /* ---------- первый экран ---------- */
-.hero{padding:clamp(2.4rem,6vh,5rem) 0 clamp(2rem,4vw,3.4rem);min-height:min(84vh,820px)}
+.hero{padding:clamp(1.6rem,3.4vh,3rem) 0 clamp(1.6rem,3vw,2.6rem);min-height:min(74vh,680px)}
 .hero__in{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(1.5rem,3vw,2.6rem);align-items:start}
-.hero__title{font-size:clamp(2.2rem,1.1rem + 3.9vw,4.5rem);line-height:1.05;letter-spacing:-.022em;text-wrap:balance}
-.hero__sub{margin:clamp(1.3rem,2.2vw,2rem) 0 0;color:var(--muted);font-size:clamp(1.05rem,.98rem + .5vw,1.5rem);line-height:1.45;max-width:44ch}
-.feats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.7rem,1.2vw,1.1rem);margin-top:clamp(2.4rem,4.5vw,3.8rem)}
-.feats li{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(.9rem,1.6vw,1.3rem);
-  padding:clamp(1.1rem,1.8vw,1.6rem);background:var(--white);border:1px solid var(--line-soft);
+.hero__title{font-size:clamp(2.05rem,1rem + 3.2vw,3.8rem);line-height:1.06;letter-spacing:-.022em;text-wrap:balance}
+.hero__sub{margin:clamp(1rem,1.7vw,1.5rem) 0 0;color:var(--muted);font-size:clamp(1rem,.95rem + .36vw,1.28rem);line-height:1.5;max-width:48ch}
+.feats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.65rem,1vw,1rem);margin-top:clamp(1.7rem,3vw,2.6rem)}
+.feats li{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(.7rem,1.1vw,.95rem);
+  padding:clamp(.95rem,1.4vw,1.25rem);background:var(--white);border:1px solid var(--line-soft);
   border-radius:14px;transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s}
 .feats li:hover{transform:translateY(-4px);border-color:rgba(210,134,42,.32);
   box-shadow:0 14px 30px -20px rgba(30,74,59,.28)}
-.feat__ico{width:clamp(46px,3.6vw,56px);aspect-ratio:1;flex:none;display:grid;place-items:center;
+.feat__ico{width:clamp(40px,2.9vw,46px);aspect-ratio:1;flex:none;display:grid;place-items:center;
   border-radius:12px;border:1px solid rgba(210,134,42,.3);background:rgba(210,134,42,.06);
   transition:background .35s var(--ease),border-color .35s}
 .feats li:hover .feat__ico{background:rgba(210,134,42,.14);border-color:rgba(210,134,42,.55)}
 .feats p{margin:0;font-size:clamp(.88rem,.83rem + .24vw,1.02rem);line-height:1.5;color:var(--ink);text-wrap:pretty}
 .hero__art{position:relative}
-.art--ear{max-width:min(100%,430px);margin-inline:auto}
+.art--ear{max-width:min(100%,380px);margin-inline:auto}
 
 /* ---------- секции и панели ---------- */
 .section{padding:clamp(1rem,2vw,1.6rem) 0}
