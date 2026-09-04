@@ -1,4 +1,14 @@
 /* ============ Солод Руси ============ */
+/* Шрифты лежат рядом с сайтом, а не на CDN: это убирает два лишних
+   соединения (fonts.googleapis.com и fonts.gstatic.com) и 12 КБ служебного CSS.
+   Файлы вариативные, поэтому один на семейство покрывает все нужные начертания.
+   Подмножество: русский и латинский алфавиты, цифры, пунктуация — 157 глифов.
+   Inter и Manrope распространяются по SIL Open Font License 1.1. */
+@font-face{font-family:'Inter';src:url(../assets/fonts/inter.woff2) format('woff2-variations');
+  font-weight:400 600;font-style:normal;font-display:swap}
+@font-face{font-family:'Manrope';src:url(../assets/fonts/manrope.woff2) format('woff2-variations');
+  font-weight:600 700;font-style:normal;font-display:swap}
+
 :root{
   --bg:#F4F3F0;
   --card:#FBFAF8;
@@ -64,7 +74,7 @@ section[id]{scroll-margin-top:6.5rem}
 .feat__ico .ico{width:60%;height:60%}
 .ico .d{stroke-width:2.1}
 .band .d{stroke:var(--amber-l)}
-.band .art--map{width:100%;height:auto;overflow:visible;display:block}
+.art--map{width:100%;height:auto;overflow:visible;display:block}
 .f-green + .vein{stroke:#EAF0EC;opacity:.35}
 .crease{stroke:#9A5F1C;stroke-width:.75;opacity:.55}
 .vein2{stroke:#8E5A1B;stroke-width:.45;opacity:.25}

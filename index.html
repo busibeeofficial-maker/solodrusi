@@ -20,10 +20,9 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Солод Руси — производство и поставка пивоваренного солода">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=202609041755">
+<link rel="preload" href="assets/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css?v=202609050254">
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -185,8 +184,10 @@
         <article class="prod" style="--i:1">
           <div class="prod__ph">
             <picture>
-              <source media="(max-width:640px)" srcset="assets/img/product-barley-600.jpg">
-              <img src="assets/img/product-barley.jpg" alt="Светлый ячменный солод: зерно" width="800" height="1000" loading="lazy" decoding="async">
+              <source type="image/webp" media="(max-width:640px)" srcset="assets/img/product-barley-720.webp">
+              <source media="(max-width:640px)" srcset="assets/img/product-barley-720.jpg">
+              <source type="image/webp" srcset="assets/img/product-barley-800.webp">
+              <img src="assets/img/product-barley-800.jpg" alt="Светлый ячменный солод: зерно" width="800" height="500" loading="lazy" decoding="async">
             </picture>
           </div>
           <div class="prod__body">
@@ -207,8 +208,9 @@
         <article class="prod" style="--i:2">
           <div class="prod__ph">
             <picture>
-              <source media="(max-width:640px)" srcset="assets/img/product-wheat-600.jpg">
-              <img src="assets/img/product-wheat.jpg" alt="Светлый пшеничный солод: зерно и колосья" width="1000" height="1000" loading="lazy" decoding="async">
+              <source media="(max-width:640px)" srcset="assets/img/product-wheat-720.jpg">
+              <source type="image/webp" srcset="assets/img/product-wheat-1000.webp">
+              <img src="assets/img/product-wheat-1000.jpg" alt="Светлый пшеничный солод: зерно и колосья" width="1000" height="625" loading="lazy" decoding="async">
             </picture>
           </div>
           <div class="prod__body">
@@ -558,6 +560,6 @@
 "contactPoint":[{"@type":"ContactPoint","telephone":"+7-800-201-24-44","email":"info@solodrusi.ru","contactType":"sales","areaServed":"RU","availableLanguage":"Russian"}],
 "sameAs":["https://t.me/solodrusi"]}
 </script>
-<script src="js/main.js?v=202609041755" defer></script>
+<script src="js/main.js?v=202609050254" defer></script>
 </body>
 </html>
