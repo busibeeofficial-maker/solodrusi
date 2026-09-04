@@ -14,14 +14,27 @@
   /* ---------- мобильное меню ---------- */
   var burger = document.getElementById('burger');
   var mobnav = document.getElementById('mobnav');
+  // пока меню открыто, остальная страница выключается из табуляции —
+  // иначе Tab уводит фокус под оверлей, к невидимым ссылкам и полям
+  var behind = [document.getElementById('main'), document.querySelector('.foot'),
+                document.querySelector('.dock')].filter(Boolean);
+  function setBehind(off) {
+    behind.forEach(function (el) {
+      if (off) { el.setAttribute('inert', ''); el.setAttribute('aria-hidden', 'true'); }
+      else { el.removeAttribute('inert'); el.removeAttribute('aria-hidden'); }
+    });
+  }
   function closeMenu() {
     document.body.classList.remove('menu-open');
-    if (burger) burger.setAttribute('aria-expanded', 'false');
+    if (burger) { burger.setAttribute('aria-expanded', 'false'); burger.focus(); }
+    setBehind(false);
   }
   if (burger && mobnav) {
     burger.addEventListener('click', function () {
       var open = document.body.classList.toggle('menu-open');
       burger.setAttribute('aria-expanded', String(open));
+      setBehind(open);
+      if (open) { var a = mobnav.querySelector('a'); if (a) a.focus(); }
     });
     mobnav.addEventListener('click', function (e) { if (e.target.closest('a')) closeMenu(); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
@@ -183,7 +196,8 @@
   var phone = document.getElementById('f-phone');
   function formatPhone(raw) {
     var d = raw.replace(/\D/g, '');
-    if (d[0] === '8') d = '7' + d.slice(1);
+    if (!d) return '';                       // поле можно стереть полностью
+    if (d[0] === '8' || d[0] === '9') d = '7' + (d[0] === '8' ? d.slice(1) : d);
     if (d[0] !== '7') d = '7' + d;
     d = d.slice(0, 11);
     var out = '+7';
@@ -194,9 +208,20 @@
     return out;
   }
   if (phone) {
-    phone.addEventListener('focus', function () { if (!phone.value) phone.value = '+7 ('; });
-    phone.addEventListener('input', function () { phone.value = formatPhone(phone.value); });
-    phone.addEventListener('blur', function () { if (phone.value.replace(/\D/g, '').length <= 1) phone.value = ''; });
+    // курсор возвращаем на место по числу цифр слева от него, иначе
+    // каретка прыгает в конец и середину номера не поправить
+    phone.addEventListener('input', function () {
+      var el = phone, pos = el.selectionStart;
+      var digitsBefore = el.value.slice(0, pos).replace(/\D/g, '').length;
+      el.value = formatPhone(el.value);
+      var i = 0, seen = 0;
+      while (i < el.value.length && seen < digitsBefore) {
+        if (/\d/.test(el.value[i])) seen++;
+        i++;
+      }
+      if (el.value[0] === '+' && i < 2) i = el.value.length;
+      try { el.setSelectionRange(i, i); } catch (e) {}
+    });
   }
 
   /* ---------- валидация и отправка ---------- */
@@ -214,9 +239,9 @@
     region: function (v) { return v.trim().length >= 2 || 'Укажите регион поставки'; },
     product: function (v) { return !!v || 'Выберите продукт'; },
     volume: function (v) {
-      var n = parseFloat(String(v).replace(',', '.'));
-      if (!v || isNaN(n)) return 'Укажите объём в тоннах';
-      return n >= 5 || 'Минимальная партия — от 5 тонн';
+      var s = String(v).trim().replace(',', '.');
+      if (!/^\d+(\.\d+)?$/.test(s)) return 'Укажите объём в тоннах числом';
+      return parseFloat(s) >= 5 || 'Минимальная партия — 5 тонн';
     }
   };
 
@@ -249,6 +274,9 @@
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
+    // ловушка для ботов: живой человек это поле не видит и не заполняет
+    var trap = form.querySelector('input[name="website"]');
+    if (trap && trap.value) return;
     var ok = true, first = null;
     Object.keys(rules).forEach(function (n) {
       var el = form.elements[n];
@@ -286,7 +314,7 @@
           '\nПредприятие: ' + data.company + '\nРегион: ' + data.region +
           '\nПродукт: ' + data.product + '\nОбъём, т: ' + data.volume
         );
-        say('Не удалось отправить заявку (' + err.message + '). Данные не потеряны — ' +
+        say('Не удалось отправить заявку. Данные не потеряны — ' +
           '<a href="mailto:info@solodrusi.ru?subject=' + encodeURIComponent('Расчёт партии солода') + '&body=' + body + '">отправьте письмом</a>, ' +
           'напишите в <a href="https://t.me/solodrusi" target="_blank" rel="noopener">Telegram</a> ' +
           'или позвоните <a href="tel:+78002012444">8-800-201-24-44</a>.', 'err');

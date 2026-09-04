@@ -7,17 +7,18 @@
 <meta name="description" content="Политика конфиденциальности персональных данных сайта solodrusi.ru. ООО «Солод Руси».">
 <meta name="robots" content="noindex, follow">
 <meta name="theme-color" content="#F4F3F0">
-<link rel="icon" href="assets/favicon.svg?v=202609041728" type="image/svg+xml">
+<link rel="canonical" href="https://busibeeofficial-maker.github.io/solodrusi/privacy.html">
+<link rel="icon" href="assets/favicon.svg?v=202609041755" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=202609041728">
+<link rel="stylesheet" href="css/style.css?v=202609041755">
 <style>
   .doc{padding:clamp(2rem,5vw,4rem) 0 clamp(3rem,6vw,5rem)}
   .doc__head{border-bottom:1px solid var(--line);padding-bottom:clamp(1.4rem,3vw,2.2rem);margin-bottom:clamp(1.8rem,4vw,3rem)}
   .doc h1{font-size:clamp(1.7rem,1.1rem + 2.2vw,3rem);line-height:1.12;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
-  .doc h1 .it{color:var(--amber)}
+  .doc h1 .it{color:#8A5417}
   .doc__meta{margin:1rem 0 0;font-size:.82rem;color:var(--muted)}
   .doc__body{max-width:74ch;font-size:.92rem}
   .doc__body h2{font-size:clamp(1.05rem,.9rem + .7vw,1.4rem);margin:clamp(2rem,4vw,2.8rem) 0 .9rem;
@@ -25,7 +26,12 @@
   .doc__body p{color:var(--muted);margin-bottom:1.1em;line-height:1.75}
   .doc__intro{font-size:clamp(1rem,.95rem + .4vw,1.15rem);color:var(--ink)!important;line-height:1.6}
   .doc__back{display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1.4rem;width:auto;padding:.7rem 1.2rem;font-size:.85rem}
-  .doc__cta{display:none}
+  /* на этой странице нет бургера и мобильного меню, поэтому телефон
+     не прячем — иначе на мобильных не остаётся ни одного контакта */
+  @media (max-width:860px){
+    .hdr__contacts{display:flex!important}
+    .hdr__contacts a:not([href^="tel"]){display:none}
+  }
 </style>
 <script>document.documentElement.classList.add('js');</script>
 </head>
@@ -124,12 +130,12 @@
     </div>
     <nav class="foot__nav" aria-label="Навигация в подвале">
       <a href="index.html#produkciya">Продукция</a>
-      <a href="index.html#vozmozhnosti">Возможности</a>
-      <a href="index.html#zayavka">Расчёт партии</a>
+      <a href="index.html#vozmozhnosti">Преимущества</a>
+      <a href="index.html#zayavka">Заявка</a>
     </nav>
     <p class="foot__copy">© 2009–<span id="year">2026</span> ООО «Солод Руси»</p>
   </div>
 </footer>
-<script src="js/main.js?v=202609041728" defer></script>
+<script src="js/main.js?v=202609041755" defer></script>
 </body>
 </html>
