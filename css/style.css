@@ -85,6 +85,23 @@ section[id]{scroll-margin-top:6.5rem}
 .mv-dot{fill:#FFF3D6}
 .birds{transform-box:view-box;transform-origin:120px 44px}
 
+/* ---------- фирменный знак ---------- */
+/* кольцо и стебель берут зелёный сайта, зерно остаётся фирменным жёлтым —
+   так знак читается как логотип, а не как наклейка поверх вёрстки */
+.mk{--mk-dark:var(--green);--mk-acid:#E9E21A;width:40px;height:40px;flex:none;display:block;overflow:visible}
+.mk .mk-ring{fill:none;stroke:var(--mk-dark)}
+.mk .mk-awns rect,.mk .mk-stem{fill:var(--mk-dark)}
+.mk .mk-grain path,.mk .mk-leaves path{fill:var(--mk-acid);stroke:var(--mk-dark);
+  stroke-width:9.5;stroke-linejoin:round;stroke-linecap:round;paint-order:stroke fill}
+
+.brand{gap:.72rem}
+.brand .mk{width:clamp(34px,2.5vw,40px);height:auto;aspect-ratio:1}
+.brand:hover .mk{--mk-dark:var(--green-l)}
+.brand .mk .mk-leaves path{transition:fill .35s var(--ease)}
+
+.mk--foot{width:38px;height:38px}
+
+
 /* ---------- шапка ---------- */
 .hdr{position:sticky;top:0;z-index:100;background:rgba(244,243,240,.82);backdrop-filter:blur(14px);
   border-bottom:1px solid transparent;transition:border-color .3s,background .3s}
@@ -112,12 +129,12 @@ section[id]{scroll-margin-top:6.5rem}
 body.menu-open{overflow:hidden}
 body.menu-open .mobnav{opacity:1;visibility:visible}
 body.menu-open .mobnav a{opacity:1;transform:none}
-body.menu-open .mobnav a:nth-child(1){transition-delay:.06s}
-body.menu-open .mobnav a:nth-child(2){transition-delay:.11s}
-body.menu-open .mobnav a:nth-child(3){transition-delay:.16s}
-body.menu-open .mobnav a:nth-child(4){transition-delay:.21s}
-body.menu-open .mobnav a:nth-child(5){transition-delay:.25s}
-body.menu-open .mobnav a:nth-child(6){transition-delay:.29s}
+body.menu-open .mobnav a:nth-of-type(1){transition-delay:.06s}
+body.menu-open .mobnav a:nth-of-type(2){transition-delay:.11s}
+body.menu-open .mobnav a:nth-of-type(3){transition-delay:.16s}
+body.menu-open .mobnav a:nth-of-type(4){transition-delay:.21s}
+body.menu-open .mobnav a:nth-of-type(5){transition-delay:.25s}
+body.menu-open .mobnav a:nth-of-type(6){transition-delay:.29s}
 body.menu-open .burger{position:relative;z-index:101}
 body.menu-open .burger span:nth-child(1){transform:translateY(6.6px) rotate(45deg)}
 body.menu-open .burger span:nth-child(2){opacity:0}
@@ -267,9 +284,12 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.6px) rotate(-45
 /* ---------- подвал ---------- */
 .foot{border-top:1px solid var(--line-soft);padding:clamp(1.6rem,3vw,2.4rem) 0}
 .foot__in{display:flex;align-items:center;gap:1.4rem 2rem;flex-wrap:wrap}
-.foot__brand{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
-.foot__brand .brand__name{font-size:1rem}
-.foot__brand p{margin:0;font-size:.76rem;color:var(--muted)}
+.foot__brand{display:grid;grid-template-columns:auto minmax(0,1fr);
+  column-gap:.75rem;row-gap:.35rem;align-items:center;max-width:46ch}
+.foot__brand .foot__lock{display:contents}
+.foot__brand .mk--foot{grid-row:1 / span 2;align-self:start;width:44px;height:44px}
+.foot__brand .brand__name{font-size:1.02rem;align-self:end}
+.foot__brand p{margin:0;font-size:.76rem;line-height:1.45;color:var(--muted);align-self:start}
 .foot__nav{display:flex;gap:1.2rem;flex-wrap:wrap;margin-left:auto}
 .foot__nav a{font-size:.78rem;color:var(--muted);text-decoration:none}
 .foot__nav a:hover{color:var(--amber)}

@@ -1,13 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Солод Руси">
-  <circle cx="50" cy="50" r="46" fill="#383754"/>
-  <g fill="#E9E21A">
-    <ellipse cx="50" cy="24" rx="6" ry="12.5"/>
-    <g transform="translate(41.5,38) rotate(-30)"><ellipse rx="5.6" ry="11.5"/></g>
-    <g transform="translate(58.5,38) rotate(30)"><ellipse rx="5.6" ry="11.5"/></g>
-    <g transform="translate(41.5,50) rotate(-30)"><ellipse rx="5.6" ry="11.5"/></g>
-    <g transform="translate(58.5,50) rotate(30)"><ellipse rx="5.6" ry="11.5"/></g>
-    <g transform="translate(41.5,62) rotate(-30)"><ellipse rx="5.6" ry="11.5"/></g>
-    <g transform="translate(58.5,62) rotate(30)"><ellipse rx="5.6" ry="11.5"/></g>
-    <rect x="47.6" y="30" width="4.8" height="52" rx="2.4"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -6 212 212" fill="none" role="img" aria-label="Солод Руси">
+  <style>
+    .mk-ring{fill:none;stroke:#1E4A3B}
+    .mk-awns rect,.mk-stem{fill:#1E4A3B}
+    .mk-grain path,.mk-leaves path{fill:#E9E21A;stroke:#1E4A3B;stroke-width:9.5;
+      stroke-linejoin:round;stroke-linecap:round;paint-order:stroke fill}
+  </style>
+  <circle class="mk-ring" cx="100" cy="100" r="90.0" stroke-width="12.5"/>
+  <g class="mk-awns">
+      <rect x="59.20" y="29.74" width="6.60" height="86.26" rx="3.30"/>
+      <rect x="71.70" y="23.84" width="6.60" height="92.16" rx="3.30"/>
+      <rect x="84.20" y="20.30" width="6.60" height="95.70" rx="3.30"/>
+      <rect x="96.70" y="18.82" width="6.60" height="97.18" rx="3.30"/>
+      <rect x="109.20" y="20.30" width="6.60" height="95.70" rx="3.30"/>
+      <rect x="121.70" y="23.84" width="6.60" height="92.16" rx="3.30"/>
+      <rect x="134.20" y="29.74" width="6.60" height="86.26" rx="3.30"/>
+  </g>
+  <rect class="mk-stem" x="94.50" y="52.0" width="11.0" height="126.0" rx="5.50"/>
+  <g class="mk-grain">
+      <path d="M100.00 44.0 C115.00 68.0 115.00 90.0 100.00 110.0 C85.00 90.0 85.00 68.0 100.00 44.0 Z"/>
+  </g>
+  <g class="mk-leaves">
+      <path d="M100.00 106.00 C92.44 72.34 73.96 71.02 58.00 73.00 C69.76 96.10 87.40 103.31 100.00 106.00 Z"/>
+      <path d="M100.00 106.00 C107.56 72.34 126.04 71.02 142.00 73.00 C130.24 96.10 112.60 103.31 100.00 106.00 Z"/>
+      <path d="M100.00 138.00 C92.44 104.34 73.96 103.02 58.00 105.00 C69.76 128.10 87.40 135.31 100.00 138.00 Z"/>
+      <path d="M100.00 138.00 C107.56 104.34 126.04 103.02 142.00 105.00 C130.24 128.10 112.60 135.31 100.00 138.00 Z"/>
+      <path d="M100.00 170.00 C92.44 136.34 73.96 135.02 58.00 137.00 C69.76 160.10 87.40 167.31 100.00 170.00 Z"/>
+      <path d="M100.00 170.00 C107.56 136.34 126.04 135.02 142.00 137.00 C130.24 160.10 112.60 167.31 100.00 170.00 Z"/>
   </g>
 </svg>
