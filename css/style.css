@@ -379,6 +379,37 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.6px) rotate(-45
   .js .is-in .nd--home{animation-name:popHome}
   @keyframes popHome{to{opacity:1;transform:scale(1)}}
 
+  /* порыв по наведению: колос отклоняется от курсора и затухает качанием.
+     Живёт на отдельных обёртках .gust/.gustTip, поэтому складывается
+     с фоновым покачиванием, а не спорит с ним. --gd задаёт сторону: JS ставит
+     -1, если курсор пришёл справа, и колос отклоняется влево. */
+  .art--ear .gust{transform-box:view-box;transform-origin:300px 652px}
+  .art--ear .gustTip{transform-box:view-box;transform-origin:300px 500px}
+  .art--ear.is-in.is-gust .gust{animation:gustBase 2.5s cubic-bezier(.2,.85,.3,1) forwards}
+  .art--ear.is-in.is-gust .gustTip{animation:gustTip 2.5s cubic-bezier(.2,.85,.3,1) .07s forwards}
+
+  @keyframes gustBase{
+    0%   {transform:rotate(0deg)}
+    9%   {transform:rotate(calc(var(--gd,1) * 3.2deg))}
+    24%  {transform:rotate(calc(var(--gd,1) * -1.35deg))}
+    40%  {transform:rotate(calc(var(--gd,1) * 1.35deg))}
+    56%  {transform:rotate(calc(var(--gd,1) * -.62deg))}
+    72%  {transform:rotate(calc(var(--gd,1) * .3deg))}
+    87%  {transform:rotate(calc(var(--gd,1) * -.12deg))}
+    100% {transform:rotate(0deg)}
+  }
+  /* верхушка идёт дальше и возвращается позже — от этого удар читается как хлыст */
+  @keyframes gustTip{
+    0%   {transform:rotate(0deg)}
+    11%  {transform:rotate(calc(var(--gd,1) * 6.6deg))}
+    27%  {transform:rotate(calc(var(--gd,1) * -2.8deg))}
+    44%  {transform:rotate(calc(var(--gd,1) * 2.6deg))}
+    60%  {transform:rotate(calc(var(--gd,1) * -1.2deg))}
+    76%  {transform:rotate(calc(var(--gd,1) * .55deg))}
+    90%  {transform:rotate(calc(var(--gd,1) * -.2deg))}
+    100% {transform:rotate(0deg)}
+  }
+
   /* ветер: стебель отклоняется у земли, метёлка догоняет с запозданием
      и качается сильнее — за счёт этого верхушка идёт по дуге, а не крутится жёстко */
   .art--ear.is-in .ear{transform-box:view-box;transform-origin:300px 652px;
