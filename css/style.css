@@ -386,34 +386,6 @@ html:not(.js) .form{display:none}
   .js .is-in .nd--home{animation-name:popHome}
   @keyframes popHome{to{opacity:1;transform:scale(1)}}
 
-  /* порыв по наведению: колос отклоняется от курсора и затухает качанием.
-     Живёт на отдельных обёртках .gust/.gustTip, поэтому складывается
-     с фоновым покачиванием, а не спорит с ним. --gd задаёт сторону: JS ставит
-     -1, если курсор пришёл справа, и колос отклоняется влево. */
-  .art--ear .gust{transform-box:view-box;transform-origin:300px 652px}
-  .art--ear .gustTip{transform-box:view-box;transform-origin:300px 500px}
-  .art--ear.is-in.is-gust .gust{animation:gustBase 4.2s cubic-bezier(.37,0,.28,1) forwards}
-  .art--ear.is-in.is-gust .gustTip{animation:gustTip 4.2s cubic-bezier(.37,0,.28,1) .16s forwards}
-
-  @keyframes gustBase{
-    0%   {transform:rotate(0deg)}
-    24%  {transform:rotate(calc(var(--gd,1) * 1.05deg))}
-    47%  {transform:rotate(calc(var(--gd,1) * -.34deg))}
-    67%  {transform:rotate(calc(var(--gd,1) * .16deg))}
-    85%  {transform:rotate(calc(var(--gd,1) * -.06deg))}
-    100% {transform:rotate(0deg)}
-  }
-  /* верхушка отходит чуть дальше основания и возвращается позже —
-     этого хватает, чтобы движение читалось как дуновение, а не как поворот палки */
-  @keyframes gustTip{
-    0%   {transform:rotate(0deg)}
-    27%  {transform:rotate(calc(var(--gd,1) * 2.1deg))}
-    50%  {transform:rotate(calc(var(--gd,1) * -.72deg))}
-    70%  {transform:rotate(calc(var(--gd,1) * .32deg))}
-    87%  {transform:rotate(calc(var(--gd,1) * -.12deg))}
-    100% {transform:rotate(0deg)}
-  }
-
   /* ветер: стебель отклоняется у земли, метёлка догоняет с запозданием
      и качается сильнее — за счёт этого верхушка идёт по дуге, а не крутится жёстко */
   .art--ear.is-in .ear{transform-box:view-box;transform-origin:300px 652px;

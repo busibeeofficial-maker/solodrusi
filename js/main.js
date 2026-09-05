@@ -63,33 +63,6 @@
     });
   });
 
-  /* ---------- порыв ветра по наведению на колос ----------
-     Курсор «приносит» ветер: если навели справа — колос отклоняется влево.
-     Каждое новое наведение перезапускает анимацию, поэтому на колос можно дуть
-     сколько угодно раз подряд. */
-  (function () {
-    var ear = document.querySelector('.art--ear');
-    if (!ear || reduced) return;
-    var host = ear.closest('.hero__art') || ear;
-
-    function gust(clientX) {
-      var r = ear.getBoundingClientRect();
-      if (!r.width) return;
-      var dir = (typeof clientX === 'number' && clientX > r.left + r.width / 2) ? -1 : 1;
-      ear.style.setProperty('--gd', dir);
-      ear.classList.remove('is-gust');
-      void ear.offsetWidth;                 // форсируем перезапуск анимации
-      ear.classList.add('is-gust');
-    }
-
-    host.addEventListener('pointerenter', function (e) { gust(e.clientX); });
-    host.addEventListener('pointerdown', function (e) { gust(e.clientX); });
-    ear.addEventListener('animationend', function (e) {
-      // gustTip заканчивается последним — снимаем класс только по нему
-      if (e.animationName === 'gustTip') ear.classList.remove('is-gust');
-    });
-  })();
-
   /* ---------- длина контура карты ----------
      у .map включён vector-effect:non-scaling-stroke, поэтому штрих живёт
      в экранных пикселях, а getTotalLength() возвращает единицы viewBox.
