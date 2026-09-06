@@ -201,17 +201,21 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.6px) rotate(-45
 /* ---------- тёмная полоса ---------- */
 .band{background:var(--green);color:#EAF0EC;padding:clamp(2.8rem,5.5vw,4.6rem) 0;margin:clamp(1rem,2vw,1.6rem) 0}
 .band__in{display:grid;row-gap:clamp(2rem,3.4vw,2.9rem)}
-.band__head{display:flex;align-items:baseline;justify-content:space-between;gap:.5rem 2rem;flex-wrap:wrap}
+.band__head{display:flex;align-items:baseline;gap:.5rem 2rem;flex-wrap:wrap}
 .band__head h2{color:#fff;font-size:clamp(1.5rem,1.2rem + 1vw,2rem)}
-.band__head > p{margin:0;font-size:.9rem;color:rgba(234,240,236,.68)}
 
 .caps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.4rem,3vw,3rem)}
 .cap{display:flex;flex-direction:column}
-.cap__n{margin:0;font-family:var(--disp);font-weight:600;font-size:.76rem;letter-spacing:.16em;color:var(--amber-l)}
+.cap__n{margin:0;font-family:var(--disp);font-weight:700;font-size:.92rem;letter-spacing:.14em;color:var(--amber-l)}
 .cap__rule{display:block;height:1px;margin:.6rem 0 1.05rem;background:rgba(234,240,236,.2);transform-origin:left}
 .cap h3{color:#fff;font-size:clamp(1.05rem,.92rem + .5vw,1.26rem);margin:0 0 .7rem}
 .cap p{margin:0 0 1.15rem;font-size:.88rem;line-height:1.6;color:rgba(234,240,236,.82)}
 .cap b{color:#fff;font-weight:600}
+/* цифра-факт вынесена в отдельную строку: внутри абзаца она ломала межстрочный ритм */
+.cap__fig{display:flex;align-items:baseline;gap:.6rem;margin:0 0 .9rem}
+.cap__fig b{font-family:var(--disp);font-weight:700;font-size:clamp(2.4rem,1.6rem + 2vw,3.4rem);
+  line-height:.9;letter-spacing:-.03em;color:var(--amber-l);font-variant-numeric:tabular-nums}
+.cap__fig span{font-size:.78rem;line-height:1.28;letter-spacing:.02em;color:rgba(234,240,236,.72)}
 .cap p.cap__lbl{margin:0 0 .55rem;font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;
   color:rgba(234,240,236,.72)}
 .dots{margin:0}
