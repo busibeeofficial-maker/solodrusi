@@ -209,13 +209,7 @@
     email: function (v) { return EMAIL.test(v.trim()) || 'Похоже, в адресе опечатка'; },
     phone: function (v) { return v.replace(/\D/g, '').length === 11 || 'Телефон в формате +7 (999) 999-99-99'; },
     company: function (v) { return v.trim().length >= 2 || 'Укажите название предприятия'; },
-    region: function (v) { return v.trim().length >= 2 || 'Укажите регион поставки'; },
-    product: function (v) { return !!v || 'Выберите продукт'; },
-    volume: function (v) {
-      var s = String(v).trim().replace(',', '.');
-      if (!/^\d+(\.\d+)?$/.test(s)) return 'Укажите объём в тоннах числом';
-      return parseFloat(s) >= 5 || 'Минимальная партия — 5 тонн';
-    }
+    region: function (v) { return v.trim().length >= 2 || 'Укажите регион поставки'; }
   };
 
   function setError(el, msg) {
@@ -240,6 +234,105 @@
     el.addEventListener('change', function () { if (el.tagName === 'SELECT') checkField(el); });
   });
 
+  /* ---------- строки заказа ----------
+     Заказать можно несколько сортов, у каждого свой объём. Минимальная
+     партия считается по сумме: 5 тонн одного сорта и 5 другого — это
+     заказ на 10 тонн, а не два отдельных. */
+  var PRODUCTS = ['Светлый ячменный солод', 'Светлый пшеничный солод'];
+  var list = document.getElementById('itemsList');
+  var tpl = document.getElementById('itemTpl');
+  var addBtn = document.getElementById('addItem');
+  var sumOut = document.getElementById('itemsSum');
+  var itemsErr = document.getElementById('err-items');
+
+  function rows() { return Array.prototype.slice.call(list.querySelectorAll('.item')); }
+  function num(v) {
+    var s = String(v || '').trim().replace(',', '.');
+    return /^\d+(\.\d+)?$/.test(s) ? parseFloat(s) : NaN;
+  }
+  function total() {
+    return rows().reduce(function (s, r) {
+      var n = num(r.querySelector('[name="volume"]').value);
+      return s + (isFinite(n) ? n : 0);
+    }, 0);
+  }
+  function refresh() {
+    var t = total();
+    sumOut.textContent = (Math.round(t * 100) / 100).toString().replace('.', ',');
+    // один и тот же сорт дважды выбрать нельзя
+    var taken = rows().map(function (r) { return r.querySelector('[name="product"]').value; });
+    rows().forEach(function (r) {
+      var sel = r.querySelector('[name="product"]');
+      Array.prototype.forEach.call(sel.options, function (o) {
+        if (!o.value) return;
+        o.disabled = taken.indexOf(o.value) !== -1 && o.value !== sel.value;
+      });
+    });
+    addBtn.hidden = rows().length >= PRODUCTS.length;
+    list.classList.toggle('is-single', rows().length < 2);
+  }
+  function addRow(focus) {
+    var node = tpl.content.firstElementChild.cloneNode(true);
+    var sel = node.querySelector('[name="product"]');
+    var inp = node.querySelector('[name="volume"]');
+    var id = 'it' + (Date.now() % 100000) + rows().length;
+    sel.id = id + 'p'; node.querySelector('.item__prod label').setAttribute('for', sel.id);
+    inp.id = id + 'v'; node.querySelector('.item__vol label').setAttribute('for', inp.id);
+    node.querySelector('.item__del').addEventListener('click', function () {
+      node.remove();
+      if (!rows().length) addRow(false);
+      refresh(); checkItems(true);
+    });
+    sel.addEventListener('change', function () { refresh(); checkItems(true); });
+    inp.addEventListener('input', function () { refresh(); checkItems(true); });
+    // подписи показываем только у первой строки, дальше они лишь повторяются;
+    // для скринридера остаются aria-label
+    if (rows().length) {
+      node.classList.add('item--sub');
+      sel.setAttribute('aria-label', 'Сорт солода');
+      inp.setAttribute('aria-label', 'Объём в тоннах');
+    }
+    list.appendChild(node);
+    refresh();
+    if (focus) sel.focus();
+    return node;
+  }
+  function setItemsError(msg) {
+    itemsErr.textContent = msg || '';
+    itemsErr.style.opacity = msg ? '1' : '';
+    list.classList.toggle('is-bad', !!msg);
+  }
+  function checkItems(soft) {
+    // soft — не ругаемся, пока пользователь ещё заполняет
+    var rs = rows(), bad = '';
+    var anyProduct = rs.some(function (r) { return !!r.querySelector('[name="product"]').value; });
+    var badNum = rs.some(function (r) {
+      var v = r.querySelector('[name="volume"]').value.trim();
+      return v !== '' && !isFinite(num(v));
+    });
+    var missing = rs.some(function (r) {
+      return r.querySelector('[name="product"]').value && !r.querySelector('[name="volume"]').value.trim();
+    });
+    var t = total();
+    if (!anyProduct) bad = 'Выберите сорт солода';
+    else if (badNum) bad = 'Объём указывается числом';
+    else if (missing) bad = 'Укажите объём для каждого сорта';
+    else if (t < 5) bad = 'Минимальная партия — 5 тонн, сейчас ' + String(Math.round(t * 100) / 100).replace('.', ',');
+    if (soft && !list.classList.contains('is-bad')) { if (!bad) setItemsError(''); return !bad; }
+    setItemsError(bad);
+    return !bad;
+  }
+  function itemsData() {
+    return rows().map(function (r) {
+      return { product: r.querySelector('[name="product"]').value,
+               volume: num(r.querySelector('[name="volume"]').value) };
+    }).filter(function (x) { return x.product && isFinite(x.volume); });
+  }
+  if (list && tpl && addBtn) {
+    addRow(false);
+    addBtn.addEventListener('click', function () { addRow(true); });
+  }
+
   function say(text, kind) {
     status.className = 'formstatus ' + (kind ? 'is-' + kind : '');
     status.innerHTML = text;
@@ -256,6 +349,10 @@
       if (!el) return;
       if (!checkField(el)) { ok = false; if (!first) first = el; }
     });
+    if (!checkItems(false)) {
+      ok = false;
+      if (!first) first = list.querySelector('[name="product"]');
+    }
     if (!ok) {
       say('Проверьте отмеченные поля — и отправим.', 'err');
       if (first) first.focus();
@@ -263,7 +360,12 @@
     }
 
     var data = {};
-    new FormData(form).forEach(function (v, k) { data[k] = v; });
+    new FormData(form).forEach(function (v, k) {
+      if (k === 'product' || k === 'volume') return;   // они уходят списком ниже
+      data[k] = v;
+    });
+    data.items = itemsData();
+    data.volume_total = data.items.reduce(function (s, x) { return s + x.volume; }, 0);
     data.page = location.href;
 
     btn.disabled = true;
@@ -284,8 +386,9 @@
       .catch(function (err) {
         var body = encodeURIComponent(
           'Заявка с сайта\n\nИмя: ' + data.name + '\nEmail: ' + data.email + '\nТелефон: ' + data.phone +
-          '\nПредприятие: ' + data.company + '\nРегион: ' + data.region +
-          '\nПродукт: ' + data.product + '\nОбъём, т: ' + data.volume
+          '\nПредприятие: ' + data.company + '\nРегион: ' + data.region + '\n\nЗаказ:\n' +
+          data.items.map(function (x) { return '  ' + x.product + ' — ' + x.volume + ' т'; }).join('\n') +
+          '\nИтого: ' + data.volume_total + ' т'
         );
         say('Не удалось отправить заявку. Данные не потеряны — ' +
           '<a href="mailto:info@solodrusi.ru?subject=' + encodeURIComponent('Расчёт партии солода') + '&body=' + body + '">отправьте письмом</a>, ' +

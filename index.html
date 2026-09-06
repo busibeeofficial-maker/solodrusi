@@ -22,7 +22,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="assets/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/style.css?v=202609061316">
+<link rel="stylesheet" href="css/style.css?v=202609061325">
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -383,29 +383,44 @@
             </div>
           </div>
 
-          <div class="row">
-            <div class="field">
-              <label for="f-region">Регион</label>
-              <input id="f-region" name="region" type="text" autocomplete="address-level1" placeholder="Например: Тульская область" required aria-describedby="err-region">
-              <small class="err" id="err-region"></small>
-            </div>
-            <div class="field">
-              <label for="f-product">Продукт</label>
-              <select id="f-product" name="product" required aria-describedby="err-product">
-                <option value="" selected disabled>Выберите продукт</option>
-                <option>Светлый ячменный солод</option>
-                <option>Светлый пшеничный солод</option>
-              </select>
-              <small class="err" id="err-product"></small>
-            </div>
+          <div class="field">
+            <label for="f-region">Регион поставки</label>
+            <input id="f-region" name="region" type="text" autocomplete="address-level1" placeholder="Например: Тульская область" required aria-describedby="err-region">
+            <small class="err" id="err-region"></small>
           </div>
 
-          <div class="field">
-            <label for="f-volume">Объём в тоннах</label>
-            <input id="f-volume" name="volume" type="text" inputmode="decimal" autocomplete="off" placeholder="Например: 20" required aria-describedby="volHint err-volume">
-            <small class="hint" id="volHint">Минимальная партия — 5&nbsp;тонн</small>
-            <small class="err" id="err-volume"></small>
-          </div>
+          <fieldset class="items">
+            <legend>Продукция и объём</legend>
+            <div id="itemsList"></div>
+            <div class="items__foot">
+              <button type="button" class="items__add" id="addItem">
+                <span aria-hidden="true">+</span> Добавить сорт
+              </button>
+              <p class="items__sum">Итого: <b id="itemsSum">0</b>&nbsp;т</p>
+            </div>
+            <small class="hint" id="itemsHint">Минимальная партия — 5&nbsp;тонн. Можно заказать несколько сортов, объём указывается для каждого.</small>
+            <small class="err" id="err-items"></small>
+          </fieldset>
+
+          <template id="itemTpl">
+            <div class="item">
+              <div class="field item__prod">
+                <label>Сорт солода</label>
+                <select name="product" required>
+                  <option value="" selected disabled>Выберите сорт</option>
+                  <option>Светлый ячменный солод</option>
+                  <option>Светлый пшеничный солод</option>
+                </select>
+              </div>
+              <div class="field item__vol">
+                <label>Тонн</label>
+                <input name="volume" type="text" inputmode="decimal" autocomplete="off" placeholder="10">
+              </div>
+              <button type="button" class="item__del" aria-label="Убрать сорт">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+              </button>
+            </div>
+          </template>
 
           <div class="hp" aria-hidden="true">
             <label for="f-website">Не заполняйте это поле</label>
@@ -561,6 +576,6 @@
 "contactPoint":[{"@type":"ContactPoint","telephone":"+7-800-201-24-44","email":"info@solodrusi.ru","contactType":"sales","areaServed":"RU","availableLanguage":"Russian"}],
 "sameAs":["https://t.me/solodrusi"]}
 </script>
-<script src="js/main.js?v=202609061316" defer></script>
+<script src="js/main.js?v=202609061325" defer></script>
 </body>
 </html>

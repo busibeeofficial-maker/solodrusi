@@ -296,6 +296,41 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.6px) rotate(-45
    Класс .js вешает main.js, поэтому :not(.js) — это ровно «скрипт не выполнился» */
 html:not(.js) .form{display:none}
 
+
+/* ---------- строки заказа: несколько сортов, у каждого свой объём ---------- */
+.items{border:0;padding:0;margin:0}
+.items legend{padding:0;margin:0 0 .55rem;font-size:.82rem;color:var(--muted)}
+.item{display:grid;grid-template-columns:minmax(0,1fr) 7.5rem 2.75rem;gap:.6rem;align-items:end;
+  margin-bottom:.6rem}
+.item .field{margin:0}
+.item__del{width:2.75rem;height:2.75rem;flex:none;display:grid;place-items:center;cursor:pointer;
+  background:none;border:1px solid var(--line);border-radius:9px;color:var(--muted);
+  transition:color .2s,border-color .2s,background .2s}
+.item__del svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.item__del:hover{color:var(--err);border-color:var(--err);background:rgba(176,63,39,.06)}
+.item:only-child .item__del{visibility:hidden}
+.item--sub label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.items__foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  margin-top:.2rem}
+.items__add{display:inline-flex;align-items:center;gap:.45rem;min-height:44px;padding:.5rem .9rem;
+  font:inherit;font-size:.86rem;font-weight:500;cursor:pointer;color:var(--green);
+  background:none;border:1px dashed var(--field-line);border-radius:9px;
+  transition:border-color .2s,background .2s}
+.items__add:hover{border-color:var(--green);background:rgba(30,74,59,.04)}
+.items__add[hidden]{display:none}
+.items__add span{font-size:1.1em;line-height:1}
+.items__sum{margin:0;font-size:.86rem;color:var(--muted)}
+.items__sum b{font-family:var(--disp);font-weight:700;font-size:1.16rem;color:var(--green);
+  font-variant-numeric:tabular-nums}
+#itemsList.is-bad .item select,#itemsList.is-bad .item input{border-color:var(--err);
+  box-shadow:0 0 0 3px rgba(176,63,39,.12)}
+.items .err{opacity:0}
+.item select{padding-right:2.1rem;text-overflow:ellipsis}
+@media (max-width:520px){
+  .item{grid-template-columns:minmax(0,1fr) 5rem 2.6rem;gap:.4rem}
+  .item__del{width:2.6rem;height:2.6rem}
+}
+
 /* ---------- подвал ---------- */
 .foot{border-top:1px solid var(--line-soft);padding:clamp(1.6rem,3vw,2.4rem) 0}
 .foot__in{display:flex;align-items:center;gap:1.4rem 2rem;flex-wrap:wrap}
