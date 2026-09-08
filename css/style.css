@@ -376,13 +376,15 @@ html:not(.js) .form{display:none}
   .js [data-anim].is-in .cap__rule{transform:none}
   .js [data-anim] .dots li,.js [data-anim]   .js [data-anim].is-in .dots li,.js [data-anim].is-in 
   /* прорисовка линий */
-  .js .art .d:not(.map):not(.rt),.js .ico .d{stroke-dasharray:var(--len,1200);stroke-dashoffset:var(--len,1200)}
-  .js .is-in .art .d:not(.map):not(.rt),.js .art.is-in .d:not(.map):not(.rt),
+  .js .art:not(.art--ear) .d:not(.map):not(.rt),.js .ico .d{stroke-dasharray:var(--len,1200);stroke-dashoffset:var(--len,1200)}
+  .js .is-in .art:not(.art--ear) .d:not(.map):not(.rt),.js .art.is-in:not(.art--ear) .d:not(.map):not(.rt),
   .js .is-in .ico .d{stroke-dashoffset:0;
     transition:stroke-dashoffset 1.5s var(--ease);transition-delay:calc(var(--dl,0) * 1ms)}
   .js .is-in .ico .d{transition-duration:.65s}
-  .js .art .f-amber,.js .art .f-amber-l,.js .art .f-green,.js .art .f-amber-d,.js .art .husk,
-  .js .art .stalk,.js .art .sheath,.js .art .fold-g,.js .art .fold-a{fill-opacity:0;transition:fill-opacity .7s ease}
+  .js .art:not(.art--ear) .f-amber,.js .art:not(.art--ear) .f-amber-l,.js .art:not(.art--ear) .f-green,
+  .js .art:not(.art--ear) .f-amber-d,.js .art:not(.art--ear) .husk,.js .art:not(.art--ear) .stalk,
+  .js .art:not(.art--ear) .sheath,.js .art:not(.art--ear) .fold-g,.js .art:not(.art--ear) .fold-a{
+    fill-opacity:0;transition:fill-opacity .7s ease}
   .js .is-in .art .f-amber{fill-opacity:.92}
   .js .is-in .art .f-amber-l{fill-opacity:.8}
   .js .is-in .art .f-green{fill-opacity:.92}
@@ -397,9 +399,9 @@ html:not(.js) .form{display:none}
     transition-delay:calc(.45s + var(--k,0) * 40ms)}
 
   /* лист вырастает от основания */
-  .js .art .lf > path{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(.35) scaleX(.7);opacity:0;
+  .js .art:not(.art--ear) .lf > path{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(.35) scaleX(.7);opacity:0;
     transition:transform .75s var(--ease),opacity .5s ease;transition-delay:calc(.35s + var(--k,0) * 55ms)}
-  .js .is-in .art .lf > path{transform:none;opacity:1}
+  .js .is-in .art:not(.art--ear) .lf > path{transform:none;opacity:1}
 
   @keyframes spinSlow{to{transform:rotate(360deg)}}
   .hero__art{will-change:transform}
@@ -424,6 +426,26 @@ html:not(.js) .form{display:none}
   @keyframes fadeRt{to{opacity:.5}}
   @keyframes pop{to{opacity:.9;transform:scale(1)}}
   @keyframes popHome{to{opacity:1;transform:scale(1)}}
+
+
+  /* Появление колоса: он вырастает из земли. Рост живёт на обёртке .earwrap,
+     а фоновое покачивание — на вложенной .ear, поэтому они не спорят за
+     transform. Общая прорисовка контуров к колосу не применяется: две
+     анимации появления одновременно читались бы как каша. */
+  .js .art--ear .earwrap{transform-box:view-box;transform-origin:300px 700px;opacity:0}
+  .js .art--ear.is-in .earwrap{animation:earGrow 1.5s cubic-bezier(.16,.9,.28,1) both}
+  .js .art--ear .lf > path{transform-box:fill-box;transform-origin:50% 100%;opacity:0}
+  .js .art--ear.is-in .lf > path{animation:earLeaf .62s cubic-bezier(.22,1.4,.5,1) both;
+    animation-delay:calc(.55s + var(--k,0) * .045s)}
+  .js .art--ear .awns{transform-box:view-box;transform-origin:300px 300px;opacity:0}
+  .js .art--ear.is-in .awns{animation:earAwns .9s cubic-bezier(.22,1,.36,1) both;animation-delay:1.25s}
+  @keyframes earGrow{
+    0%{transform:scaleY(.02) scaleX(.55);opacity:0}
+    18%{opacity:1}
+    72%{transform:scaleY(1.04) scaleX(1.02)}
+    100%{transform:none;opacity:1}}
+  @keyframes earLeaf{from{transform:scale(.2);opacity:0}to{transform:none;opacity:1}}
+  @keyframes earAwns{from{transform:scaleY(.3);opacity:0}to{transform:none;opacity:1}}
 
   /* ветер: стебель отклоняется у земли, метёлка догоняет с запозданием
      и качается сильнее — за счёт этого верхушка идёт по дуге, а не крутится жёстко */
