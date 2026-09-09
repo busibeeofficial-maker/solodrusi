@@ -404,7 +404,7 @@ html:not(.js) .form{display:none}
   .js .is-in .art:not(.art--ear) .lf > path{transform:none;opacity:1}
 
   @keyframes spinSlow{to{transform:rotate(360deg)}}
-  .hero__art{will-change:transform}
+  @media (min-width:1081px){ .hero__art{will-change:transform} }
 
   /* колос едва заметно покачивается, когда прорисовка закончена */
   /* граница вычерчивается по контуру, острова следом */
@@ -543,7 +543,11 @@ html:not(.js) .form{display:none}
   .brand__tag{display:none}
   .hero{min-height:0}
   .hero__in{grid-template-columns:1fr;gap:1.6rem}
-  .hero__art{max-width:min(100%,360px);margin-inline:auto;margin-top:-1.6rem}
+  /* Колос — часть двухколоночной композиции: он уравновешивает текст справа.
+     Ниже 1081px второй колонки нет, и колос уезжает под карточки, в мёртвую
+     зону: 458px декорации ниже сгиба, мимо которых надо пролистать. Убираем
+     его там же, где пропадает колонка. */
+  .hero__art{display:none}
   .geo{grid-template-columns:1fr;gap:1.4rem;align-items:start}
   .panel--form{grid-template-columns:1fr}
 }
@@ -555,7 +559,6 @@ html:not(.js) .form{display:none}
 @media (max-width:640px){
   .hero{padding-top:1.2rem;min-height:0}
   .hero__in{gap:1.2rem}
-  .hero__art{max-width:min(76%,300px)}
   .feats{grid-template-columns:1fr;gap:1rem}
   .caps{grid-template-columns:1fr;gap:0}
   .cap:not(:last-child){padding-bottom:1.7rem;margin-bottom:1.7rem;border-bottom:1px solid rgba(234,240,236,.14)}

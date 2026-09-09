@@ -43,7 +43,10 @@
   /* ---------- подготовка линейной графики к прорисовке ---------- */
   // каждой линии задаём её собственную длину и небольшую задержку,
   // чтобы рисунок собирался по частям, а не появлялся целиком
-  Array.prototype.forEach.call(document.querySelectorAll('.art, .ico'), function (art) {
+  // Колос исключён намеренно: его --len не читает ни одно правило (в css/style.css
+  // строка с var(--len) явно исключает .art--ear), а расчёт гонит ~93 getTotalLength
+  // впустую при каждой загрузке на всех ширинах.
+  Array.prototype.forEach.call(document.querySelectorAll('.art:not(.art--ear), .ico'), function (art) {
     var isIcon = art.classList.contains('ico');
     var paths = art.querySelectorAll('.d');
     Array.prototype.forEach.call(paths, function (p, i) {
