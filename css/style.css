@@ -86,16 +86,29 @@ section[id]{scroll-margin-top:6.5rem}
 .map--isl{stroke-width:1.1;opacity:.62}
 
 
-/* Точка производства на карте: дыхание вместо мигания. Свечение —
-   радиальный градиент, у масштабируемого круга со сплошной заливкой
-   был бы виден жёсткий край. Два слоя идут навстречу с некратными
-   периодами 7,2 и 4,6 с, поэтому пульс не читается как метроном. */
-.pt circle{transform-box:fill-box;transform-origin:center}
-.pt__ring{fill:none;stroke:#F3C87E;stroke-width:.9;opacity:.31;vector-effect:non-scaling-stroke}
-.pt__core{fill:#FFF6E2}
-.pt__lb{fill:rgba(234,240,236,.72);font-family:var(--body);font-size:7.5px;letter-spacing:.02em}
-/* карта на телефоне вдвое уже, подпись вместе с ней уезжала в нечитаемые пять пикселей */
-@media (max-width:640px){.pt__lb{font-size:12px}}
+/* Грузовик едет по выверенному маршруту Венёв → Владивосток через
+   Екатеринбург, Новосибирск, Иркутск и Хабаровск — те же расстояния и
+   пропорции, что уже были посчитаны и проверены на пересечение границы.
+   Без анимации (нет JS, или prefers-reduced-motion) дорога и города
+   остаются полностью нарисованными — эти правила не требуют .js,
+   опасности «недорисованного хвоста», как у общего контура карты, тут
+   нет: короткие сегменты, запас в дэше явно больше нужного. */
+.ln{fill:none;stroke:#EFB35C;stroke-width:1.5;stroke-linecap:round;vector-effect:non-scaling-stroke;opacity:.85}
+.ct{fill:#F3C87E;opacity:.9;transform-box:fill-box;transform-origin:center}
+.ct--home{fill:#FFF6E2}
+.lb{fill:rgba(234,240,236,.72);font-family:var(--body);font-size:7.5px;letter-spacing:.02em}
+/* карта на телефоне вдвое уже, подписи вместе с ней уезжали в нечитаемые пять пикселей */
+@media (max-width:640px){.lb{font-size:12px}}
+
+/* сам грузовик: по умолчанию скрыт (.truck{opacity:0} ниже) — виден,
+   только пока его двигает SMIL. Так безопаснее, чем display:none:
+   играть с getBBox/motion-path внутри спрятанного через display элемента
+   рискованнее, чем через прозрачность. */
+.truckglow{transform-box:fill-box;transform-origin:center}
+.tk-body{fill:#F3C87E;stroke:#B9832E;stroke-width:.35}
+.tk-cab{fill:#FFE9BC;stroke:#B9832E;stroke-width:.35}
+.tk-win{fill:#1E4A3B;opacity:.85}
+.tk-wheel{fill:#1E4A3B;stroke:#F3C87E;stroke-width:.45}
 
 /* ---------- фирменный знак ---------- */
 /* кольцо и стебель берут зелёный сайта, зерно остаётся фирменным жёлтым —
@@ -417,16 +430,45 @@ html:not(.js) .form{display:none}
   @keyframes trace{to{stroke-dashoffset:0}}
 
 
-  /* дыхание точки производства; амплитуда подобрана по варианту «тише» */
-  .pt__far {animation:brFar  7.2s cubic-bezier(.45,0,.55,1) infinite alternate}
-  .pt__near{animation:brNear 4.6s cubic-bezier(.45,0,.55,1) infinite alternate}
-  .pt__core{animation:brCore 4.6s cubic-bezier(.45,0,.55,1) infinite alternate}
-  .pt__ring{animation:brRing 7.2s cubic-bezier(.45,0,.55,1) infinite alternate}
-  @keyframes brFar {from{opacity:.21;transform:scale(.88)} to{opacity:.45;transform:scale(1.12)}}
-  @keyframes brNear{from{opacity:.38;transform:scale(1.06)}to{opacity:.62;transform:scale(.9)}}
-  @keyframes brCore{from{opacity:.82}to{opacity:1}}
-  @keyframes brRing{from{opacity:.17;transform:scale(1)}  to{opacity:.37;transform:scale(1.06)}}
-  @keyframes fadeRt{to{opacity:.5}}
+  /* маршрут и города оживают только когда движение разрешено — иначе
+     они и так полностью нарисованы правилом выше без единой анимации */
+  .ln{stroke-dasharray:var(--len,400);stroke-dashoffset:var(--len,400);opacity:0}
+  .ct{opacity:0}
+  .ln,.ct{animation:var(--k) 15.83s linear infinite}
+  .ct{animation-timing-function:cubic-bezier(.34,1.5,.64,1)}
+  @keyframes ln0{0%,0.0%{stroke-dashoffset:var(--len);opacity:.85}4.372%{stroke-dashoffset:0;opacity:.85}91.787%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
+  @keyframes ln1{0%,4.372%{stroke-dashoffset:var(--len);opacity:.85}8.049%{stroke-dashoffset:0;opacity:.85}91.787%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
+  @keyframes ln2{0%,8.049%{stroke-dashoffset:var(--len);opacity:.85}12.522%{stroke-dashoffset:0;opacity:.85}91.787%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
+  @keyframes ln3{0%,12.522%{stroke-dashoffset:var(--len);opacity:.85}16.641%{stroke-dashoffset:0;opacity:.85}91.787%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
+  @keyframes ln4{0%,16.641%{stroke-dashoffset:var(--len);opacity:.85}20.154%{stroke-dashoffset:0;opacity:.85}91.787%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
+  @keyframes ln5{0%,20.154%{stroke-dashoffset:var(--len);opacity:.85}25.31%{stroke-dashoffset:0;opacity:.85}91.787%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
+  @keyframes ln6{0%,25.31%{stroke-dashoffset:var(--len);opacity:.85}30.756%{stroke-dashoffset:0;opacity:.85}91.787%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
+  @keyframes ln7{0%,30.756%{stroke-dashoffset:var(--len);opacity:.85}33.637%{stroke-dashoffset:0;opacity:.85}91.787%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
+  @keyframes ln8{0%,33.637%{stroke-dashoffset:var(--len);opacity:.85}37.971%{stroke-dashoffset:0;opacity:.85}91.787%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
+  @keyframes ln9{0%,37.971%{stroke-dashoffset:var(--len);opacity:.85}45.186%{stroke-dashoffset:0;opacity:.85}91.787%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
+  @keyframes ln10{0%,45.186%{stroke-dashoffset:var(--len);opacity:.85}48.231%{stroke-dashoffset:0;opacity:.85}91.787%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
+  @keyframes ln11{0%,48.231%{stroke-dashoffset:var(--len);opacity:.85}52.363%{stroke-dashoffset:0;opacity:.85}91.787%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
+  @keyframes ln12{0%,52.363%{stroke-dashoffset:var(--len);opacity:.85}58.643%{stroke-dashoffset:0;opacity:.85}91.787%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
+  @keyframes ln13{0%,58.643%{stroke-dashoffset:var(--len);opacity:.85}63.672%{stroke-dashoffset:0;opacity:.85}91.787%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
+  @keyframes ln14{0%,63.672%{stroke-dashoffset:var(--len);opacity:.85}68.992%{stroke-dashoffset:0;opacity:.85}91.787%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
+  @keyframes ln15{0%,68.992%{stroke-dashoffset:var(--len);opacity:.85}75.36%{stroke-dashoffset:0;opacity:.85}91.787%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
+  @keyframes ct0{0%,0.0%{opacity:0;transform:scale(.3)}0.9%{opacity:1;transform:scale(1.6)}2.2%{opacity:.95;transform:scale(1)}91.787%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+  @keyframes ct1{0%,4.372%{opacity:0;transform:scale(.3)}5.272%{opacity:1;transform:scale(1.6)}6.572%{opacity:.95;transform:scale(1)}91.787%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+  @keyframes ct2{0%,8.049%{opacity:0;transform:scale(.3)}8.949%{opacity:1;transform:scale(1.6)}10.249%{opacity:.95;transform:scale(1)}91.787%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+  @keyframes ct3{0%,12.522%{opacity:0;transform:scale(.3)}13.422%{opacity:1;transform:scale(1.6)}14.722%{opacity:.95;transform:scale(1)}91.787%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+  @keyframes ct4{0%,16.641%{opacity:0;transform:scale(.3)}17.541%{opacity:1;transform:scale(1.6)}18.841%{opacity:.95;transform:scale(1)}91.787%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+  @keyframes ct5{0%,20.154%{opacity:0;transform:scale(.3)}21.054%{opacity:1;transform:scale(1.6)}22.354%{opacity:.95;transform:scale(1)}91.787%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+  @keyframes ct6{0%,25.31%{opacity:0;transform:scale(.3)}26.21%{opacity:1;transform:scale(1.6)}27.51%{opacity:.95;transform:scale(1)}91.787%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+  @keyframes ct7{0%,30.756%{opacity:0;transform:scale(.3)}31.656%{opacity:1;transform:scale(1.6)}32.956%{opacity:.95;transform:scale(1)}91.787%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+  @keyframes ct8{0%,33.637%{opacity:0;transform:scale(.3)}34.537%{opacity:1;transform:scale(1.6)}35.837%{opacity:.95;transform:scale(1)}91.787%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+  @keyframes ct9{0%,37.971%{opacity:0;transform:scale(.3)}38.871%{opacity:1;transform:scale(1.6)}40.171%{opacity:.95;transform:scale(1)}91.787%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+  @keyframes ct10{0%,45.186%{opacity:0;transform:scale(.3)}46.086%{opacity:1;transform:scale(1.6)}47.386%{opacity:.95;transform:scale(1)}91.787%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+  @keyframes ct11{0%,48.231%{opacity:0;transform:scale(.3)}49.131%{opacity:1;transform:scale(1.6)}50.431%{opacity:.95;transform:scale(1)}91.787%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+  @keyframes ct12{0%,52.363%{opacity:0;transform:scale(.3)}53.263%{opacity:1;transform:scale(1.6)}54.563%{opacity:.95;transform:scale(1)}91.787%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+  @keyframes ct13{0%,58.643%{opacity:0;transform:scale(.3)}59.543%{opacity:1;transform:scale(1.6)}60.843%{opacity:.95;transform:scale(1)}91.787%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+  @keyframes ct14{0%,63.672%{opacity:0;transform:scale(.3)}64.572%{opacity:1;transform:scale(1.6)}65.872%{opacity:.95;transform:scale(1)}91.787%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+  @keyframes ct15{0%,68.992%{opacity:0;transform:scale(.3)}69.892%{opacity:1;transform:scale(1.6)}71.192%{opacity:.95;transform:scale(1)}91.787%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+  @keyframes ct16{0%,75.36%{opacity:0;transform:scale(.3)}76.26%{opacity:1;transform:scale(1.6)}77.56%{opacity:.95;transform:scale(1)}91.787%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
   @keyframes pop{to{opacity:.9;transform:scale(1)}}
   @keyframes popHome{to{opacity:1;transform:scale(1)}}
 
