@@ -434,13 +434,15 @@ html:not(.js) .form{display:none}
   .ct{opacity:0}
   .ln,.ct{animation:var(--k) 15.83s linear infinite}
   .ct{animation-timing-function:cubic-bezier(.34,1.5,.64,1)}
-  @keyframes ln0{0%,0%{stroke-dashoffset:var(--len);opacity:.85}22.7397%{stroke-dashoffset:0;opacity:.85}92%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
-  @keyframes ln1{0%,22.7397%{stroke-dashoffset:var(--len);opacity:.85}51.1995%{stroke-dashoffset:0;opacity:.85}92%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
-  @keyframes ln2{0%,51.1995%{stroke-dashoffset:var(--len);opacity:.85}80%{stroke-dashoffset:0;opacity:.85}92%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
+  @keyframes ln0{0%,0%{stroke-dashoffset:var(--len);opacity:.85}19.1617%{stroke-dashoffset:0;opacity:.85}92%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
+  @keyframes ln1{0%,19.1617%{stroke-dashoffset:var(--len);opacity:.85}42.6535%{stroke-dashoffset:0;opacity:.85}92%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
+  @keyframes ln2{0%,42.6535%{stroke-dashoffset:var(--len);opacity:.85}62.9151%{stroke-dashoffset:0;opacity:.85}92%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
+  @keyframes ln3{0%,62.9151%{stroke-dashoffset:var(--len);opacity:.85}80%{stroke-dashoffset:0;opacity:.85}92%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
   @keyframes ct0{0%,0%{opacity:0;transform:scale(.3)}1%{opacity:1;transform:scale(1.6)}2.3%{opacity:.95;transform:scale(1)}92%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
-  @keyframes ct1{0%,22.7397%{opacity:0;transform:scale(.3)}23.7%{opacity:1;transform:scale(1.6)}25%{opacity:.95;transform:scale(1)}92%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
-  @keyframes ct2{0%,51.1995%{opacity:0;transform:scale(.3)}52.2%{opacity:1;transform:scale(1.6)}53.5%{opacity:.95;transform:scale(1)}92%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
-  @keyframes ct3{0%,80%{opacity:0;transform:scale(.3)}81%{opacity:1;transform:scale(1.6)}82.3%{opacity:.95;transform:scale(1)}92%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+  @keyframes ct1{0%,19.1617%{opacity:0;transform:scale(.3)}20.2%{opacity:1;transform:scale(1.6)}21.5%{opacity:.95;transform:scale(1)}92%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+  @keyframes ct2{0%,42.6535%{opacity:0;transform:scale(.3)}43.7%{opacity:1;transform:scale(1.6)}45%{opacity:.95;transform:scale(1)}92%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+  @keyframes ct3{0%,62.9151%{opacity:0;transform:scale(.3)}64%{opacity:1;transform:scale(1.6)}65.3%{opacity:.95;transform:scale(1)}92%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+  @keyframes ct4{0%,80%{opacity:0;transform:scale(.3)}81%{opacity:1;transform:scale(1.6)}82.3%{opacity:.95;transform:scale(1)}92%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
   @keyframes pop{to{opacity:.9;transform:scale(1)}}
   @keyframes popHome{to{opacity:1;transform:scale(1)}}
 
