@@ -196,11 +196,10 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.6px) rotate(-45
   transition:transform 1s var(--ease)}
 .prod:hover .prod__ph img{transform:scale(1.045)}
 .prod__body{padding:clamp(1.1rem,2vw,1.7rem)}
-.specs{position:relative;z-index:1;max-width:none}
-.specs>div{display:flex;justify-content:space-between;gap:1.2rem;padding:.62rem 0;border-bottom:1px solid var(--line-soft)}
-.specs dt{color:var(--muted);font-size:.86rem;flex:none}
-.specs dd{margin:0;font-size:.86rem;text-align:right;font-weight:500}
 .prod__note{position:relative;z-index:1;margin:1.1rem 0 0;font-size:.8rem;line-height:1.5;color:var(--muted)}
+
+/* «О нас»: обычная проза внутри панели, ширина ограничена для читаемости */
+.about__body{max-width:64ch}
 
 /* ---------- тёмная полоса ---------- */
 .band{background:var(--green);color:#EAF0EC;padding:clamp(2.8rem,5.5vw,4.6rem) 0;margin:clamp(1rem,2vw,1.6rem) 0}
@@ -518,15 +517,6 @@ html:not(.js) .form{display:none}
   .js [data-anim] h1,.js [data-anim] h2{clip-path:inset(0 0 105% 0);
     transition:clip-path 1s var(--ease) .08s}
   .js [data-anim].is-in h1,.js [data-anim].is-in h2{clip-path:inset(0 0 -12% 0)}
-
-  /* строки характеристик выезжают по очереди */
-  .js .specs > div{opacity:0;transform:translateX(-10px);
-    transition:opacity .5s var(--ease),transform .5s var(--ease)}
-  .js .is-in .specs > div{opacity:1;transform:none}
-  .js .is-in .specs > div:nth-child(1){transition-delay:.28s}
-  .js .is-in .specs > div:nth-child(2){transition-delay:.36s}
-  .js .is-in .specs > div:nth-child(3){transition-delay:.44s}
-  .js .is-in .specs > div:nth-child(4){transition-delay:.52s}
 
   /* чертёжная обвязка в карточке поворачивается при наведении */
 
