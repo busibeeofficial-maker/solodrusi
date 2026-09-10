@@ -104,7 +104,6 @@ section[id]{scroll-margin-top:6.5rem}
    только пока его двигает SMIL. Так безопаснее, чем display:none:
    играть с getBBox/motion-path внутри спрятанного через display элемента
    рискованнее, чем через прозрачность. */
-.truckglow{transform-box:fill-box;transform-origin:center}
 .tk-body{fill:#F3C87E;stroke:#B9832E;stroke-width:.35}
 .tk-cab{fill:#FFE9BC;stroke:#B9832E;stroke-width:.35}
 .tk-win{fill:#1E4A3B;opacity:.85}
