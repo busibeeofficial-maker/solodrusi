@@ -394,9 +394,7 @@
           '\nИтого: ' + data.volume_total + ' т'
         );
         say('Не удалось отправить заявку. Данные не потеряны — ' +
-          '<a href="mailto:info@solodrusi.ru?subject=' + encodeURIComponent('Расчёт партии солода') + '&body=' + body + '">отправьте письмом</a>, ' +
-          'напишите в <a href="https://t.me/solodrusi" target="_blank" rel="noopener">Telegram</a> ' +
-          'или позвоните <a href="tel:+78002012444">8-800-201-24-44</a>.', 'err');
+          '<a href="mailto:coordinator@solodrusi.ru?subject=' + encodeURIComponent('Расчёт партии солода') + '&body=' + body + '">отправьте письмом</a>.', 'err');
       })
       .then(function () {
         btn.disabled = false;

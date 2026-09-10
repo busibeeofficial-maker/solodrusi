@@ -138,8 +138,8 @@ section[id]{scroll-margin-top:6.5rem}
   opacity:0;visibility:hidden;transition:opacity .35s var(--ease),visibility .35s}
 .mobnav a{text-decoration:none;font-family:var(--disp);font-weight:600;font-size:1.7rem;color:var(--green);padding:.55rem 0;
   opacity:0;transform:translateY(14px);transition:opacity .4s var(--ease),transform .4s var(--ease)}
-.mobnav__tel,.mobnav__mail,.mobnav__tg{font-family:var(--body)!important;font-size:1rem!important;font-weight:500!important;color:var(--muted)!important}
-.mobnav__tel{margin-top:1.4rem;border-top:1px solid var(--line);padding-top:1.2rem!important}
+.mobnav__mail{font-family:var(--body)!important;font-size:1rem!important;font-weight:500!important;color:var(--muted)!important;
+  margin-top:1.4rem;border-top:1px solid var(--line);padding-top:1.2rem!important}
 body.menu-open{overflow:hidden}
 body.menu-open .mobnav{opacity:1;visibility:visible}
 body.menu-open .mobnav a{opacity:1;transform:none}
@@ -159,7 +159,7 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.6px) rotate(-45
 .hero__in{display:grid;grid-template-columns:minmax(0,1.38fr) minmax(0,.62fr);gap:clamp(1.5rem,3vw,2.6rem);align-items:center}
 .hero__title{font-size:clamp(2.05rem,1rem + 3.2vw,3.8rem);line-height:1.06;letter-spacing:-.022em;text-wrap:balance}
 .hero__sub{margin:clamp(1rem,1.7vw,1.5rem) 0 0;color:var(--muted);font-size:clamp(1rem,.95rem + .36vw,1.28rem);line-height:1.5;max-width:48ch}
-.feats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.65rem,1vw,1rem);margin-top:clamp(1.7rem,3vw,2.6rem)}
+.feats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(.65rem,1vw,1rem);margin-top:clamp(1.7rem,3vw,2.6rem)}
 .feats li{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(.7rem,1.1vw,.95rem);
   padding:clamp(.95rem,1.4vw,1.25rem);background:var(--white);border:1px solid var(--line-soft);
   border-radius:14px;transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s}
@@ -198,7 +198,12 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.6px) rotate(-45
 .prod__body{padding:clamp(1.1rem,2vw,1.7rem)}
 .prod__note{position:relative;z-index:1;margin:1.1rem 0 0;font-size:.8rem;line-height:1.5;color:var(--muted)}
 
-/* «О нас»: обычная проза внутри панели, ширина ограничена для читаемости */
+/* «О нас»: заголовок и подводка стоят друг под другом, как в hero,
+   а не разъезжаются по краям строки, как .panel__head — там так сделано ради
+   карточек-сеток, а здесь ниже просто сплошной текст, и разъезд читался криво */
+.about__head{margin-bottom:clamp(1.2rem,2.4vw,1.8rem)}
+.about__head h2{font-size:clamp(1.4rem,1rem + 1.2vw,1.9rem)}
+.about__head p{margin:.5rem 0 0;color:var(--muted);font-size:.88rem;max-width:64ch}
 .about__body{max-width:64ch}
 
 /* ---------- тёмная полоса ---------- */
@@ -349,7 +354,6 @@ html:not(.js) .form{display:none}
 .dock{display:none;position:fixed;left:0;right:0;bottom:0;z-index:90;gap:.6rem;padding:.6rem var(--gut) max(.6rem,env(safe-area-inset-bottom));
   background:rgba(244,243,240,.94);backdrop-filter:blur(14px);border-top:1px solid var(--line-soft)}
 .dock a{flex:1;text-align:center;text-decoration:none;font-weight:600;font-size:.85rem;padding:.85rem .4rem;border-radius:10px}
-.dock__tel{border:1px solid var(--line);color:var(--green)}
 .dock__cta{background:var(--amber-btn);color:#fff}
 
 /* ================= АНИМАЦИИ ================= */
