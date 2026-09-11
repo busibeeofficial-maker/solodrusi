@@ -95,6 +95,55 @@
     mapTimer = setTimeout(tuneMapLen, 180);
   });
 
+  /* Грузовик не должен жить на своих keyTimes/SMIL-часах — они у браузера
+     отдельные от CSS-анимации, которая рисует линии/точки, и рано или поздно
+     расходятся (throttling вкладки и т.п.). Вместо этого на каждый кадр
+     считываем РЕАЛЬНОЕ текущее время той самой CSS-анимации (.ln) и кладём
+     грузовик строго на неё — рассинхрон физически невозможен. */
+  if (!reduced) {
+    Array.prototype.forEach.call(document.querySelectorAll('.truck[data-keypoints]'), function (truck) {
+      var svg = truck.closest('svg');
+      var pathEl = svg && svg.querySelector('#truckPath');
+      var refLine = svg && svg.querySelector('.ln');
+      if (!pathEl || !refLine || !truck.getAnimations && !refLine.getAnimations) return;
+      var kp = truck.getAttribute('data-keypoints').split(';').map(Number);
+      var kt = truck.getAttribute('data-keytimes').split(';').map(Number);
+      var totalLen;
+      try { totalLen = pathEl.getTotalLength(); } catch (e) { return; }
+      if (!totalLen || !isFinite(totalLen)) return;
+
+      function setTruck(t) {
+        var i = 0;
+        while (i < kt.length - 2 && t > kt[i + 1]) i++;
+        var span = kt[i + 1] - kt[i];
+        var local = span > 0 ? (t - kt[i]) / span : 0;
+        var arc = kp[i] + (kp[i + 1] - kp[i]) * local;
+        arc = Math.max(0, Math.min(1, arc));
+        var lenAt = arc * totalLen;
+        var d = 0.5;
+        var ptA = pathEl.getPointAtLength(Math.max(0, lenAt - d));
+        var ptB = pathEl.getPointAtLength(Math.min(totalLen, lenAt + d));
+        var pt = pathEl.getPointAtLength(lenAt);
+        var angle = Math.atan2(ptB.y - ptA.y, ptB.x - ptA.x) * 180 / Math.PI;
+        truck.setAttribute('transform', 'translate(' + pt.x.toFixed(2) + ' ' + pt.y.toFixed(2) + ') rotate(' + angle.toFixed(1) + ')');
+        truck.style.opacity = t <= 0.92 ? 1 : Math.max(0, 1 - (t - 0.92) / 0.08);
+      }
+
+      function frame() {
+        var anims = refLine.getAnimations ? refLine.getAnimations() : [];
+        var anim = anims[0];
+        var timing = anim && anim.effect && anim.effect.getComputedTiming && anim.effect.getComputedTiming();
+        var dur = timing && typeof timing.duration === 'number' ? timing.duration : 0;
+        if (anim && dur) {
+          var t = ((anim.currentTime || 0) % dur) / dur;
+          setTruck(t);
+        }
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    });
+  }
+
   /* ---------- появление ---------- */
   var targets = document.querySelectorAll('[data-anim], .art');
   if ('IntersectionObserver' in window && !reduced) {
