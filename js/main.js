@@ -289,6 +289,27 @@
     el.addEventListener('change', function () { if (el.tagName === 'SELECT') checkField(el); });
   });
 
+  /* согласие на обработку персональных данных — обязательный чекбокс,
+     не отмеченный по умолчанию (152-ФЗ, ст. 9): форму нельзя отправить
+     без отдельного осознанного действия пользователя */
+  var consentBox = form.elements['consent'];
+  function checkConsent() {
+    if (!consentBox) return true;
+    var ok = consentBox.checked;
+    var field = consentBox.closest('.field');
+    if (field) {
+      var slot = field.querySelector('.err');
+      field.classList.toggle('is-bad', !ok);
+      if (slot) slot.textContent = ok ? '' : 'Нужно подтвердить согласие на обработку данных';
+    }
+    return ok;
+  }
+  if (consentBox) {
+    consentBox.addEventListener('change', function () {
+      if (consentBox.closest('.field').classList.contains('is-bad')) checkConsent();
+    });
+  }
+
   /* ---------- строки заказа ----------
      Заказать можно несколько сортов, у каждого свой объём. Минимальная
      партия считается по сумме: 5 тонн одного сорта и 5 другого — это
@@ -407,6 +428,10 @@
     if (!checkItems(false)) {
       ok = false;
       if (!first) first = list.querySelector('[name="product"]');
+    }
+    if (!checkConsent()) {
+      ok = false;
+      if (!first) first = consentBox;
     }
     if (!ok) {
       say('Проверьте отмеченные поля — и отправим.', 'err');
